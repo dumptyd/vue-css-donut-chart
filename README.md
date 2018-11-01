@@ -57,7 +57,7 @@ Vue.use(Donut);
 
 ```html
 <link href="https://unpkg.com/vue-css-donut-chart/dist/vcdonut.css">
-<script src="https://unpkg.com/vue-css-donut-chart/dist/vcdonut.umd.min.js"></script>
+<script src="https://unpkg.com/vue-css-donut-chart"></script>
 <script>
   Vue.use(vcdonut.default);
 </script>

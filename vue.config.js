@@ -1,4 +1,4 @@
 module.exports = {
   productionSourceMap: false,
-  baseUrl: 'vue-css-donut-chart'
+  baseUrl: process.env.NODE_ENV === 'production' ? '/vue-css-donut-chart/' : '/'
 };
