@@ -5,9 +5,9 @@
     <span>Lightweight Vue component for drawing pure CSS donut charts</span>
   </div>
   <nav class="container-nav">
-    <a href="#">Documentation</a>
-    <a href="#">Installation</a>
-    <a href="#">Usage</a>
+    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md">Documentation</a>
+    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md#installation">Installation</a>
+    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md#usage">Usage</a>
     <a href="https://github.com/dumptyd/vue-css-donut-chart">Github</a>
   </nav>
   <div class="container-donut">

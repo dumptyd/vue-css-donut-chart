@@ -190,5 +190,3 @@ Slot for plugging in your own legend.
 ## License
 
 Code released under [MIT]((https://github.com/vue-css-donut-chart/vue-css-donut-chart/blob/master/LICENSE)) license.
-
-Copyright (c) 2018, dumptyd.
