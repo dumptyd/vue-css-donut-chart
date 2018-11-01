@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://dumptyd.github.io/vue-css-donut-chart">
-    <img src="https://dumptyd.github.io/favicon.png">
+    <img src="https://dumptyd.github.io/vue-css-donut-chart/favicon.png">
   </a>
   <h1 align="center">vue-css-donut-chart</h1>
   <p align="center">Lightweight Vue component for drawing pure CSS donut charts</p>
