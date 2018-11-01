@@ -1,6 +1,6 @@
 {
   "name": "vue-css-donut-chart",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Lightweight Vue component for drawing pure CSS donut charts",
   "keywords": ["donut", "chart", "vue", "css", "pure CSS"],
 

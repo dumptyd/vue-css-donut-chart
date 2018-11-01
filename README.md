@@ -36,17 +36,7 @@ npm install vue-css-donut-chart
 
 ```javascript
 import Donut from 'vue-css-donut-chart';
-
-Vue.use(Donut);
-
-```
-
-- CommonJS 
-
-```javascript
-
-
-const Donut = require('vue-css-donut-chart');
+import 'vue-css-donut-chart/dist/vcdonut.css';
 
 Vue.use(Donut);
 
