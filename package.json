@@ -12,9 +12,10 @@
 
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "MODE=site vue-cli-service build --modern --dest docs",
-    "build-lib": "vue-cli-service build --target lib --name vcdonut src/index.js",
-    "lint": "vue-cli-service lint"
+    "build": "yarn clear:babel-cache && MODE=site vue-cli-service build --modern --dest docs",
+    "build-lib": "yarn clear:babel-cache && vue-cli-service build --target lib --name vcdonut src/index.js",
+    "lint": "vue-cli-service lint",
+    "clear:babel-cache": "rm -rf ./node_modules/.cache/babel-loader/*"
   },
 
   "dependencies": {
