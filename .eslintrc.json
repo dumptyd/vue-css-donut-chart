@@ -1,0 +1,57 @@
+{
+    "extends": [
+      "plugin:vue/essential",
+      "airbnb-base"
+    ],
+    "rules": {
+      "comma-dangle": "off",
+      "prefer-arrow-callback": "off",
+      "func-names": "off",
+      "brace-style": ["warn", "stroustrup"],
+      "space-before-function-paren": "off",
+      "consistent-return": "off",
+      "object-shorthand": "off",
+      "no-underscore-dangle": "off",
+      "no-useless-escape": "off",
+      "wrap-iife": ["error", "inside"],
+      "no-plusplus": "off",
+      "no-alert": "off",
+      "no-trailing-spaces": "warn",
+      "eol-last": "warn",
+      "padded-blocks": "warn",
+      "keyword-spacing": "warn",
+      "no-unused-vars": "warn",
+      "object-curly-spacing": "warn",
+      "spaced-comment": "warn",
+      "no-param-reassign": "off",
+      "space-before-blocks": "off",
+      "prefer-template": "warn",
+      "prefer-const": "warn",
+      "no-template-curly-in-string": "off",
+      "max-len": ["warn", 120],
+      "eqeqeq": "warn",
+      "newline-per-chained-call": "off",
+      "no-prototype-builtins": "warn",
+      "no-shadow": "warn",
+      "no-confusing-arrow": "off",
+      "no-bitwise": ["warn", { "allow": ["~"] }],
+      "import/no-named-as-default": "off",
+      "no-new": "off",
+      "object-property-newline": "warn",
+      "import/prefer-default-export": "off",
+      "arrow-parens": "off",
+      "arrow-body-style": "off",
+      "one-var-declaration-per-line": "off",
+      "one-var": "off",
+      "no-restricted-properties": "off",
+      "object-curly-newline": ["error", { "consistent": true }],
+      "valid-typeof": "off"
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "env": {
+      "node": true
+    },
+    "plugins": ["import"]
+}

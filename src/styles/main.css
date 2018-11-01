@@ -1,0 +1,91 @@
+/*
+  All classes are prefixed with `cdc-` (short for css-donut-chart)
+  to avoid clashes with other classes in the app
+*/
+
+/* Container for both the donut chart and the legend */
+.cdc-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Donut chart */
+.cdc {
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Middle of the donut */
+.cdc-overlay {
+  opacity: 1;
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Donut center text */
+.cdc-text {
+  text-align: center;
+}
+
+/* Legend container */
+.cdc-legend {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+  flex-wrap: wrap;
+}
+
+/* Legend item */
+.cdc-legend-item {
+  display: inline-flex;
+  align-items: center;
+  margin: 0.5em;
+}
+
+/* Color square inside each legend item */
+.cdc-legend-item-color {
+  height: 1.25em;
+  width: 1.25em;
+  border-radius: 2px;
+  margin-right: 0.5em;
+}
+
+/* Container for all the sections of the donut */
+.cdc-sections { border-radius: 50%; }
+
+/* Section */
+.cdc-section {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  overflow: hidden;
+  background-color: transparent;
+  transform-origin: 0% 50%;
+  pointer-events: none;
+}
+
+/* Part of the section to which the specified color is applied */
+.cdc-filler {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  pointer-events: all;
+}
+
+/* For sections that draw from 0 to 180 degrees */
+.cdc-section.cdc-section-right { left: 50%; }
+.cdc-section.cdc-section-right .cdc-filler { transform-origin: 0% 50%; }
+
+/* and 180 to 360 degrees */
+.cdc-section.cdc-section-left {
+  left: 0%;
+  transform-origin: 100% 50%;
+}
+.cdc-section.cdc-section-left .cdc-filler { transform-origin: 100% 50%; }
