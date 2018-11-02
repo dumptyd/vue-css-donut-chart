@@ -7,7 +7,7 @@
   "author": "dumptyd <dumptyd2.0@gmail.com>",
 
   "main": "dist/vcdonut.umd.js",
-  "module": "src/index.js",
+  "module": "dist/vcdonut.common.js",
   "unpkg": "dist/vcdonut.umd.min.js",
 
   "scripts": {
