@@ -81,7 +81,7 @@ With sane defaults in place, basic usage is as simple as passing a `sections` ar
   <vc-donut
     background="white" foreground="grey"
     :size="200" unit="px" :thickness="30"
-    hasLegend legendPlacement="top"
+    has-legend legend-placement="top"
     :sections="sections" :total="100"
   >
     <h1>100%</h1>
@@ -120,11 +120,6 @@ With sane defaults in place, basic usage is as simple as passing a `sections` ar
 - default: `20`
 - Percentage thickness of the donut ring. Can be any positive value between 0-100.
 
-#### `size`
-- type: `Number`
-- default: `250`
-- Diameter of the donut. Can be any positive value.
-
 #### `text`
 - type: `String`
 - Donut text. This can also be provided through the default slot.
@@ -144,12 +139,12 @@ With sane defaults in place, basic usage is as simple as passing a `sections` ar
 - default: `100`
 - Total for calculating the percentage for each section.
 
-#### `hasLegend`
+#### `has-legend`
 - type: `Boolean`
 - default: `false`
 - Specifies whether the donut should have a legend.
 
-#### `legendPlacement`
+#### `legend-placement`
 - type: `String`
 - default: `bottom`
 - Specifies where the legend should be placed. Valid values are `top`, `right`, `bottom` and `left`.
