@@ -172,6 +172,10 @@ Slot for plugging in your own legend.
 
 <br>
 
+## Contributing
+
+- vue-css-donut-chart issues - https://github.com/dumptyd/vue-css-donut-chart/issues
+
 ## License
 
 Code released under [MIT]((https://github.com/vue-css-donut-chart/vue-css-donut-chart/blob/master/LICENSE)) license.
