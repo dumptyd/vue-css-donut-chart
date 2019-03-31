@@ -92,9 +92,9 @@ With sane defaults in place, basic usage is as simple as passing a `sections` ar
     data() {
       return {
         sections: [
-          { label: 'Red section' value: 25, color: 'red' },
-          { label: 'Green section' value: 25, color: 'green' },
-          { label: 'Blue section' value: 25, color: 'blue' }
+          { label: 'Red section', value: 25, color: 'red' },
+          { label: 'Green section', value: 25, color: 'green' },
+          { label: 'Blue section', value: 25, color: 'blue' }
         ]
       };
     }
