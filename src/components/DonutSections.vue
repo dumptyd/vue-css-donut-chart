@@ -1,5 +1,5 @@
 <template>
-<div class="cdc-sections">
+<div class="cdc-sections" :style="containerStyles">
   <div
       class="cdc-section" v-for="(section, idx) in dSections"
       :key="idx" :class="section.className" :style="section.sectionStyles"
@@ -20,9 +20,15 @@ const sectionClass = {
 
 export default {
   props: {
+    startAngle: { type: Number, default: 0 },
     sections: { type: Array, default: () => [] }
   },
   computed: {
+    containerStyles() {
+      return {
+        transform: `rotate(${this.startAngle}deg)`
+      };
+    },
     dSections() {
       const maxDegreesPerSection = 180;
       let degreesConsumed = 0;

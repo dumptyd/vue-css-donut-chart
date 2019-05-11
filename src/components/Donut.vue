@@ -3,6 +3,7 @@
   <div class="cdc" ref="donut" :style="donutStyles">
     <DonutSections
       :sections="donutSections"
+      :start-angle="startAngle"
       @section-click="emitSectionClick">
     </DonutSections>
     <div class="cdc-overlay" :style="overlayStyles">
@@ -73,7 +74,10 @@ export default {
     legendPlacement: {
       default: placement.BOTTOM,
       validator: val => !!placement[val.toUpperCase()]
-    }
+    },
+
+    // degree angle at which the first section begins
+    startAngle: { type: Number, default: 0 }
   },
   watch: {
     size() {
@@ -155,12 +159,11 @@ export default {
       return placementStyles[this.legendPlacement];
     },
     donutStyles() {
-      const width = `${this.size}${this.unit}`;
+      const size = `${this.size}${this.unit}`;
       const styles = {
-        height: 'auto',
-        width,
-        backgroundColor: this.foreground,
-        paddingBottom: width
+        height: size,
+        width: size,
+        backgroundColor: this.foreground
       };
       return styles;
     },

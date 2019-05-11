@@ -58,7 +58,10 @@
 }
 
 /* Container for all the sections of the donut */
-.cdc-sections { border-radius: 50%; }
+.cdc-sections {
+  height: 100%;
+  border-radius: 50%;
+}
 
 /* Section */
 .cdc-section {
