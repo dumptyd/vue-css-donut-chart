@@ -83,6 +83,8 @@ With sane defaults in place, basic usage is as simple as passing a `sections` ar
     :size="200" unit="px" :thickness="30"
     has-legend legend-placement="top"
     :sections="sections" :total="100"
+    :start-angle="0"
+    @section-click="handleSectionClick"
   >
     <h1>100%</h1>
   </vc-donut>
@@ -97,6 +99,11 @@ With sane defaults in place, basic usage is as simple as passing a `sections` ar
           { label: 'Blue section', value: 25, color: 'blue' }
         ]
       };
+    },
+    methods: {
+      handleSectionClick(section) {
+        console.log(`${section.label} clicked.`);
+      }
     }
   };
 </script>
@@ -134,6 +141,11 @@ With sane defaults in place, basic usage is as simple as passing a `sections` ar
 - default: `#eeeeee`
 - Foreground color of the donut. This is the color that is shown for empty regions of the donut ring.
 
+#### `start-angle`
+- type: `Number`
+- default: `0`
+- Angle measure in degrees where the first section starts.
+
 #### `total`
 - type: `Number`
 - default: `100`
@@ -157,6 +169,14 @@ With sane defaults in place, basic usage is as simple as passing a `sections` ar
   - `value` - Size of the section. Should be <= `total`.
   - `color` - Color of the section. vc-donut comes with 24 predefined colors, so this property is optional if you have <= 24 sections without the `color` property.
   - `label` - Name of this section. This is used in the legend as well as tooltip text.
+
+<br>
+
+### Events
+
+#### `section-click`
+- parameter(s): `section` - section object
+- Emitted when a section is clicked. `section` object of the clicked section is passed as a parameter. Make sure to add a custom property (eg: `name`) to the section objects to uniquely identify them.
 
 <br>
 
