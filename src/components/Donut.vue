@@ -88,7 +88,12 @@ export default {
     },
   },
   data() {
-    return { donutEl: null, fontSize: '1em' };
+    return {
+      donutEl: null,
+      fontSize: '1em',
+
+      resizeListener: null
+    };
   },
   computed: {
     donutSections() {
@@ -206,9 +211,13 @@ export default {
   mounted() {
     this.donutEl = this.$refs.donut;
     this.recalcFontSize();
-    window.addEventListener('resize', () => {
-      this.recalcFontSize();
-    });
+
+    this.resizeListener = this.recalcFontSize.bind(this);
+
+    window.addEventListener('resize', this.resizeListener);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeListener);
   },
   components: { DonutSections }
 };
