@@ -3,6 +3,7 @@
   <div
       class="cdc-section" v-for="(section, idx) in dSections"
       :key="idx" :class="section.className" :style="section.sectionStyles"
+      @click="emitClick(sections[idx])"
   >
     <div class="cdc-filler" :style="section.fillerStyles" :title="section.label" />
   </div>
@@ -50,6 +51,11 @@ export default {
       });
 
       return sections;
+    }
+  },
+  methods: {
+    emitClick(section) {
+      this.$emit('section-click', section);
     }
   }
 };

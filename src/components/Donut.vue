@@ -1,7 +1,10 @@
 <template>
 <div class="cdc-container" :style="placementStyles.container">
   <div class="cdc" ref="donut" :style="donutStyles">
-    <DonutSections :sections="donutSections" />
+    <DonutSections
+      :sections="donutSections"
+      @section-click="emitSectionClick">
+    </DonutSections>
     <div class="cdc-overlay" :style="overlayStyles">
       <div class="cdc-text" :style="donutTextStyles">
         <slot>{{ text }}</slot>
@@ -192,6 +195,9 @@ export default {
       }
 
       this.fontSize = widthInPx ? `${(widthInPx * scaleDownBy).toFixed(2)}px` : '1em';
+    },
+    emitSectionClick(section) {
+      this.$emit('section-click', section);
     }
   },
   mounted() {
