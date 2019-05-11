@@ -17,6 +17,7 @@
         :hasLegend="hasLegend" :legendPlacement="legendPlacement"
         :sections="validatedSections"
         :total="total"
+        @section-click="handleSectionClick"
     >
       <div v-html="donutHTML"></div>
     </Donut>
@@ -196,6 +197,9 @@ export default {
     },
     removeSection(idx) {
       this.sections.splice(idx, 1);
+    },
+    handleSectionClick(section) {
+      window.alert(`${section.label || 'Section'} clicked`);
     }
   },
   components: { Donut }
