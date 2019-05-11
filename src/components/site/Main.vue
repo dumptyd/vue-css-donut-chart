@@ -17,6 +17,7 @@
         :hasLegend="hasLegend" :legendPlacement="legendPlacement"
         :sections="validatedSections"
         :total="total"
+        :start-angle="startAngle"
         @section-click="handleSectionClick"
     >
       <div v-html="donutHTML"></div>
@@ -48,6 +49,10 @@
           <div class="control">
             <label for="thickness">Ring thickness (%)</label>
             <input name="thickness" type="number" min="0" max="100" class="sm" v-model="thickness">
+          </div>
+          <div class="control">
+            <label for="start-angle">Start angle (in degrees)</label>
+            <input name="start-angle" type="number" class="sm" v-model="startAngle">
           </div>
         </div>
       </div>
@@ -158,6 +163,7 @@ export default {
       size: 200,
       unit: 'px',
       thickness: 20,
+      startAngle: 0,
 
       total,
 
