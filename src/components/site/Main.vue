@@ -39,7 +39,7 @@
           </div>
           <div class="control">
             <label for="size">Size</label>
-            <input name="size" type="number" class="sm" v-model="size">
+            <input name="size" type="number" class="sm" v-model.number="size">
             <select v-model="unit">
               <option v-for="option in unitOptions" :key="option" :value="option">
                 {{ option }}
@@ -48,11 +48,11 @@
           </div>
           <div class="control">
             <label for="thickness">Ring thickness (%)</label>
-            <input name="thickness" type="number" min="0" max="100" class="sm" v-model="thickness">
+            <input name="thickness" type="number" min="0" max="100" class="sm" v-model.number="thickness">
           </div>
           <div class="control">
             <label for="start-angle">Start angle (in degrees)</label>
-            <input name="start-angle" type="number" class="sm" v-model="startAngle">
+            <input name="start-angle" type="number" class="sm" v-model.number="startAngle">
           </div>
         </div>
       </div>
