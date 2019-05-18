@@ -166,8 +166,8 @@ export default {
     donutStyles() {
       const size = `${this.size}${this.unit}`;
       const styles = {
-        height: size,
         width: size,
+        paddingBottom: size,
         backgroundColor: this.foreground
       };
       return styles;
