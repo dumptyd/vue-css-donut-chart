@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.3]
+
+### Fixed
+
+- 1.1.2 broke the usage of `%` unit (#10). That's fixed now.
+- Font size is now recalculated only when the chart has rendered.
+
+
 ## [1.1.2]
 
 ### Added
