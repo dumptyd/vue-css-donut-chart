@@ -197,12 +197,14 @@ export default {
       const scaleDownBy = 0.08;
       let widthInPx = this.size;
 
-      if (this.unit !== 'px') {
-        if (this.donutEl) widthInPx = this.donutEl.clientWidth;
-        else widthInPx = null;
-      }
+      this.$nextTick(() => {
+        if (this.unit !== 'px') {
+          if (this.donutEl) widthInPx = this.donutEl.clientWidth;
+          else widthInPx = null;
+        }
 
-      this.fontSize = widthInPx ? `${(widthInPx * scaleDownBy).toFixed(2)}px` : '1em';
+        this.fontSize = widthInPx ? `${(widthInPx * scaleDownBy).toFixed(2)}px` : '1em';
+      });
     },
     emitSectionClick(section) {
       this.$emit('section-click', section);
