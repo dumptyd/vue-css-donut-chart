@@ -1,7 +1,7 @@
 <template>
 <div class="cdc-sections" :style="containerStyles">
   <div
-      class="cdc-section" v-for="(section, idx) in dSections"
+      class="cdc-section" v-for="(section, idx) in donutSections"
       :key="idx" :class="section.className" :style="section.sectionStyles"
       @click="emitClick(sections[idx])"
   >
@@ -29,7 +29,7 @@ export default {
         transform: `rotate(${this.startAngle}deg)`
       };
     },
-    dSections() {
+    donutSections() {
       const maxDegreesPerSection = 180;
       let degreesConsumed = 0;
 
@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     emitClick(section) {
-      this.$emit('section-click', section);
+      this.$emit('section-click', section.$section);
     }
   }
 };

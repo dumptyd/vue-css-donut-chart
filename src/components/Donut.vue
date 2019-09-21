@@ -57,7 +57,7 @@ export default {
     // color to use for the empty ring areas
     foreground: { type: String, default: '#eeeeee' },
 
-    // sections of the donut, must have a `degree` property
+    // sections of the donut, must have a `value` property
     // other valid properties are `label` and `color` (default is `dodgerblue`)
     sections: {
       type: Array,
@@ -72,6 +72,7 @@ export default {
     total: { type: Number, default: 100, validator: v => v > 0 },
     hasLegend: { type: Boolean, default: false },
     legendPlacement: {
+      type: String,
       default: placement.BOTTOM,
       validator: val => !!placement[val.toUpperCase()]
     },
@@ -126,16 +127,12 @@ export default {
             const remainingDegreesInCurrentSection = degreesInASection - consumedDegrees;
 
             sections.push(
-              Object.assign(
-                {}, section, { degree: remainingDegreesInCurrentSection, color }
-              ),
-              Object.assign(
-                {}, section, { degree: degree - remainingDegreesInCurrentSection, color }
-              )
+              { ...section, degree: remainingDegreesInCurrentSection, color, $section: section },
+              { ...section, degree: degree - remainingDegreesInCurrentSection, color, $section: section }
             );
           }
           else {
-            sections.push(Object.assign({}, section, { degree, color }));
+            sections.push({ ...section , degree, color, $section: section });
           }
 
           consumedDegrees += degree;
