@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [closed]
 jobs:
-  test:
+  lint_test_upload-coverage:
     runs-on: ubuntu-16.04
     steps:
     - uses: actions/checkout@v1
@@ -24,8 +24,6 @@ jobs:
     - name: Run tests
       if: success()
       run: yarn test:coverage
-      env:
-        CI: true
 
     - name: Upload coverage
       if: success()
