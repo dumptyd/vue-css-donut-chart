@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
-/dist
-/docs
+dist/
+docs/
+coverage/
 
 # local env files
 .env.local
