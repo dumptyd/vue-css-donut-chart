@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [closed]
 jobs:
-  build:
+  test:
     runs-on: ubuntu-16.04
     steps:
     - uses: actions/checkout@v1
@@ -28,7 +28,8 @@ jobs:
         CI: true
 
     - name: Upload coverage
-      uses: codecov/codecov-action@v1.0.2
       if: success()
-      with:
-        token: "${{ secrets.CODECOV_TOKEN }}"
+      run: bash <(curl -s https://codecov.io/bash) -t $TOKEN -B $REF
+      env:
+        TOKEN: "${{ secrets.CODECOV_TOKEN }}"
+        REF: "${{ github.ref }}"
