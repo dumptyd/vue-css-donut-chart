@@ -133,7 +133,7 @@ export default {
             );
           }
           else {
-            sections.push({ ...section , degree, color, $section: section });
+            sections.push({ ...section, degree, color, $section: section });
           }
 
           consumedDegrees += degree;
