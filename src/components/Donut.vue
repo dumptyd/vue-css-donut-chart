@@ -64,6 +64,7 @@ export default {
       default: () => [],
       validator(sections) {
         for (let i = 0; i < sections.length; ++i) {
+          /* istanbul ignore if - already covered by unit tests for sectionValidator */
           if (!sectionValidator(sections[i])) return false;
         }
         return true;
@@ -145,6 +146,7 @@ export default {
       return sections;
     },
     legend() {
+      /* istanbul ignore if - legend isn't rendered at all because of v-if="hasLegend" */
       if (!this.hasLegend) return null;
       let currentDefaultColorIdx = 0;
 
@@ -196,6 +198,7 @@ export default {
 
       this.$nextTick(() => {
         if (this.unit !== 'px') {
+          /* istanbul ignore else */
           if (this.donutEl) widthInPx = this.donutEl.clientWidth;
           else widthInPx = null;
         }
