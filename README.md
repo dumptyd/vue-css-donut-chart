@@ -6,6 +6,8 @@
   <p align="center">Lightweight Vue component for drawing pure CSS donut charts</p>
 </p>
 
+![](https://github.com/dumptyd/vue-css-donut-chart/workflows/tests.yaml/badge.svg)
+
 
 ## Live demo
 
