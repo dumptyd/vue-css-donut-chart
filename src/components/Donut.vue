@@ -57,13 +57,14 @@ export default {
     // color to use for the empty ring areas
     foreground: { type: String, default: '#eeeeee' },
 
-    // sections of the donut, must have a `degree` property
+    // sections of the donut, must have a `value` property
     // other valid properties are `label` and `color` (default is `dodgerblue`)
     sections: {
       type: Array,
       default: () => [],
       validator(sections) {
         for (let i = 0; i < sections.length; ++i) {
+          /* istanbul ignore if - already covered by unit tests for sectionValidator */
           if (!sectionValidator(sections[i])) return false;
         }
         return true;
@@ -72,6 +73,7 @@ export default {
     total: { type: Number, default: 100, validator: v => v > 0 },
     hasLegend: { type: Boolean, default: false },
     legendPlacement: {
+      type: String,
       default: placement.BOTTOM,
       validator: val => !!placement[val.toUpperCase()]
     },
@@ -126,16 +128,12 @@ export default {
             const remainingDegreesInCurrentSection = degreesInASection - consumedDegrees;
 
             sections.push(
-              Object.assign(
-                {}, section, { degree: remainingDegreesInCurrentSection, color }
-              ),
-              Object.assign(
-                {}, section, { degree: degree - remainingDegreesInCurrentSection, color }
-              )
+              { ...section, degree: remainingDegreesInCurrentSection, color, $section: section },
+              { ...section, degree: degree - remainingDegreesInCurrentSection, color, $section: section }
             );
           }
           else {
-            sections.push(Object.assign({}, section, { degree, color }));
+            sections.push({ ...section, degree, color, $section: section });
           }
 
           consumedDegrees += degree;
@@ -148,6 +146,7 @@ export default {
       return sections;
     },
     legend() {
+      /* istanbul ignore if - legend isn't rendered at all because of v-if="hasLegend" */
       if (!this.hasLegend) return null;
       let currentDefaultColorIdx = 0;
 
@@ -199,6 +198,7 @@ export default {
 
       this.$nextTick(() => {
         if (this.unit !== 'px') {
+          /* istanbul ignore else */
           if (this.donutEl) widthInPx = this.donutEl.clientWidth;
           else widthInPx = null;
         }

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.4]
+
+### Fixed
+
+- `section-click` is now emitted with the original `section` object that's passed to the component. Earlier, it was being emitted with the internal `section` object which is an extended version of the original one.
+
+### Other changes
+
+- The component now has tests and a very high coverage. Check out the README to see the coverage info.
+- The project now has automated checks for broken tests and linter errors.
+- Minor refactoring.
+
 ## [1.1.3]
 
 ### Fixed
