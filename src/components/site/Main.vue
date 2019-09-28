@@ -172,7 +172,6 @@ export default {
 
       textType: 'HTML',
       donutHTML: `<h1 style="margin: 0;">${initialConsumed}%</h1> donut consumed`,
-      donutText: '',
 
       unitOptions,
       placementOptions,
