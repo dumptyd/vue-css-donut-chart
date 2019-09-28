@@ -7,6 +7,8 @@
 </p>
 
 ![](https://github.com/dumptyd/vue-css-donut-chart/workflows/tests.yaml/badge.svg)
+[![codecov](https://codecov.io/gh/dumptyd/vue-css-donut-chart/branch/master/graph/badge.svg)](https://codecov.io/gh/dumptyd/vue-css-donut-chart)
+
 
 
 ## Live demo
