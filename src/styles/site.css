@@ -53,7 +53,7 @@ a:hover { color: #000; }
 .container-body { padding: 0 1.5rem 3rem; }
 
 .control-group {
-  display: flex; 
+  display: flex;
   flex-wrap: wrap;
 }
 .control {
@@ -71,6 +71,16 @@ a:hover { color: #000; }
 footer {
   text-align: center;
   padding: 1rem;
+}
+
+.badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.badge {
+  margin: 0 .5rem;
 }
 
 label { margin-right: .75rem; }

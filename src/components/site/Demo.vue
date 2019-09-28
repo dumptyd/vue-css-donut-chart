@@ -11,17 +11,16 @@
     <a href="https://github.com/dumptyd/vue-css-donut-chart">Github</a>
   </nav>
   <div class="container-donut">
-    <Donut
-        :background="background" :foreground="foreground"
-        :size="size" :unit="unit" :thickness="thickness"
-        :hasLegend="hasLegend" :legendPlacement="legendPlacement"
-        :sections="validatedSections"
-        :total="total"
-        :start-angle="startAngle"
-        @section-click="handleSectionClick"
-    >
+    <donut
+      :background="background" :foreground="foreground"
+      :size="size" :unit="unit" :thickness="thickness"
+      :hasLegend="hasLegend" :legendPlacement="legendPlacement"
+      :sections="validatedSections"
+      :total="total"
+      :start-angle="startAngle"
+      @section-click="handleSectionClick">
       <div v-html="donutHTML"></div>
-    </Donut>
+    </donut>
   </div>
   <div class="container-body">
     <div class="configuration">
