@@ -55,7 +55,7 @@ Vue.use(Donut);
 
 ## Usage
 
-### Basic usage 
+### Basic usage
 
 With sane defaults in place, basic usage is as simple as passing a `sections` array of objects with a `value` prop to `vc-donut` component.
 
