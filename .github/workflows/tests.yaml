@@ -1,28 +1,29 @@
-name: Check for lint errors, run tests and upload coverage
+name: tests
 on: [push, pull_request]
 jobs:
   lint_test_upload-coverage:
+    name: Lint, test and upload coverage
     runs-on: ubuntu-16.04
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v1
 
-    - name: Use Node.js 8.15.0
-      uses: actions/setup-node@v1
-      with:
-        node-version: 8.15.0
+      - name: Use Node.js 8.15.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: 8.15.0
 
-    - run: yarn install
+      - run: yarn install
 
-    - name: Check for lint errors
-      run: yarn lint --no-fix
+      - name: Check for lint errors
+        run: yarn lint --no-fix
 
-    - name: Run tests
-      if: success()
-      run: yarn test:coverage
+      - name: Run tests
+        if: success()
+        run: yarn test:coverage
 
-    - name: Upload coverage
-      if: success()
-      run: bash <(curl -s https://codecov.io/bash) -t $TOKEN -B $REF
-      env:
-        TOKEN: "${{ secrets.CODECOV_TOKEN }}"
-        REF: "${{ github.ref }}"
+      - name: Upload coverage
+        if: success()
+        run: bash <(curl -s https://codecov.io/bash) -t $TOKEN -B $REF
+        env:
+          TOKEN: "${{ secrets.CODECOV_TOKEN }}"
+          REF: "${{ github.ref }}"

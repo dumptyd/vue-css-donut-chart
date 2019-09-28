@@ -6,6 +6,10 @@
   <p align="center">Lightweight Vue component for drawing pure CSS donut charts</p>
 </p>
 
+![](https://github.com/dumptyd/vue-css-donut-chart/workflows/tests.yaml/badge.svg)
+[![codecov](https://codecov.io/gh/dumptyd/vue-css-donut-chart/branch/master/graph/badge.svg)](https://codecov.io/gh/dumptyd/vue-css-donut-chart)
+
+
 
 ## Live demo
 
@@ -14,8 +18,8 @@ Live demo can be found on the project page - https://dumptyd.github.io/vue-css-d
 ## Features
 
 * Pure CSS. Vue is only used for calculations.
-* No external dependencies
-* ~3KB min+gzipped JS and ~0.4KB min+gzipped CSS
+* No external dependencies.
+* ~3KB min+gzipped JS and ~0.4KB min+gzipped CSS.
 
 ## Installation
 
