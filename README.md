@@ -16,8 +16,8 @@ Live demo can be found on the project page - https://dumptyd.github.io/vue-css-d
 ## Features
 
 * Pure CSS. Vue is only used for calculations.
-* No external dependencies
-* ~3KB min+gzipped JS and ~0.4KB min+gzipped CSS
+* No external dependencies.
+* ~3KB min+gzipped JS and ~0.4KB min+gzipped CSS.
 
 ## Installation
 

@@ -2,6 +2,7 @@ name: tests
 on: [push, pull_request]
 jobs:
   lint_test_upload-coverage:
+    name: Lint, test and upload coverage
     runs-on: ubuntu-16.04
     steps:
       - uses: actions/checkout@v1
