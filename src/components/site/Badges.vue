@@ -28,7 +28,7 @@ const badges = [
     href: 'https://bundlephobia.com/result?p=vue-css-donut-chart'
   },
   {
-    alt: 'Github Actions status',
+    alt: 'GitHub Actions status',
     // eslint-disable-next-line max-len
     badgeUrl: 'https://img.shields.io/endpoint.svg?url=https://actions-badge.atrox.dev/dumptyd/vue-css-donut-chart/badge&label=tests&logo=none',
     href: 'https://actions-badge.atrox.dev/dumptyd/vue-css-donut-chart/goto'

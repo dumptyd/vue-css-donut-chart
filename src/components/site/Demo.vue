@@ -8,7 +8,7 @@
     <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md">Documentation</a>
     <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md#installation">Installation</a>
     <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md#usage">Usage</a>
-    <a href="https://github.com/dumptyd/vue-css-donut-chart">Github</a>
+    <a href="https://github.com/dumptyd/vue-css-donut-chart">GitHub</a>
   </nav>
   <div class="container-donut">
     <donut

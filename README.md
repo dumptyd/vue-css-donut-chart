@@ -16,7 +16,7 @@
     <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/minzip/vue-css-donut-chart?style=flat-square">
   </a>
   <a href="https://actions-badge.atrox.dev/dumptyd/vue-css-donut-chart/goto">
-    <img alt="Github Actions status" src="https://img.shields.io/endpoint.svg?url=https://actions-badge.atrox.dev/dumptyd/vue-css-donut-chart/badge&label=tests&style=flat-square&logo=none">
+    <img alt="GitHub Actions status" src="https://img.shields.io/endpoint.svg?url=https://actions-badge.atrox.dev/dumptyd/vue-css-donut-chart/badge&label=tests&style=flat-square&logo=none">
   </a>
   <a href="https://codecov.io/gh/dumptyd/vue-css-donut-chart">
     <img alt="Coverage status" src="https://img.shields.io/codecov/c/gh/dumptyd/vue-css-donut-chart?style=flat-square">
