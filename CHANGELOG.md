@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - The component now has tests and a very high coverage. Check out the README to see the coverage info.
 - The project now has automated checks for broken tests and linter errors.
 - Minor refactoring.
+- Readme has been revamped with better formatting.
 
 ## [1.1.3]
 

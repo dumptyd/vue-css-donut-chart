@@ -1,14 +1,14 @@
 <template>
 <div class="container">
   <div class="container-header">
-    <h1>vue-css-donut-chart</h1>
+    <h1>vue-css-donut-chart <sup>{{ version }}</sup></h1>
     <span>Lightweight Vue component for drawing pure CSS donut charts</span>
   </div>
   <nav class="container-nav">
     <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md">Documentation</a>
     <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md#installation">Installation</a>
     <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md#usage">Usage</a>
-    <a href="https://github.com/dumptyd/vue-css-donut-chart">Github</a>
+    <a href="https://github.com/dumptyd/vue-css-donut-chart">GitHub</a>
   </nav>
   <div class="container-donut">
     <donut
@@ -129,6 +129,7 @@
 <script>
 import Donut from '../Donut.vue';
 import colors from '../../utils/colors';
+import { version } from '../../../package.json';
 import '../../styles/normalize.css';
 import '../../styles/site.css';
 
@@ -176,7 +177,9 @@ export default {
       placementOptions,
       textTypeOptions,
 
-      sections
+      sections,
+
+      version
     };
   },
   computed: {

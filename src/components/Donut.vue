@@ -1,11 +1,11 @@
 <template>
 <div class="cdc-container" :style="placementStyles.container">
   <div class="cdc" ref="donut" :style="donutStyles">
-    <DonutSections
+    <donut-sections
       :sections="donutSections"
       :start-angle="startAngle"
       @section-click="emitSectionClick">
-    </DonutSections>
+    </donut-sections>
     <div class="cdc-overlay" :style="overlayStyles">
       <div class="cdc-text" :style="donutTextStyles">
         <slot>{{ text }}</slot>

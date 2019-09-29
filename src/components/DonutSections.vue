@@ -1,11 +1,10 @@
 <template>
 <div class="cdc-sections" :style="containerStyles">
   <div
-      class="cdc-section" v-for="(section, idx) in donutSections"
-      :key="idx" :class="section.className" :style="section.sectionStyles"
-      @click="emitClick(sections[idx])"
-  >
-    <div class="cdc-filler" :style="section.fillerStyles" :title="section.label" />
+    class="cdc-section" v-for="(section, idx) in donutSections"
+    :key="idx" :class="section.className" :style="section.sectionStyles"
+    @click="emitClick(sections[idx])">
+    <div class="cdc-filler" :style="section.fillerStyles" :title="section.label"></div>
   </div>
 </div>
 </template>
