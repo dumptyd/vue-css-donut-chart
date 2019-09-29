@@ -2,9 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.6]
 ## [1.1.5]
 
-- Minor alignment change in documentation so it doesn't look awkward on npm.
+- Minor alignment change in documentation so it doesn't look awkward on npm. npm has a bug where it doesn't center align some things.
 
 ## [1.1.4]
 
