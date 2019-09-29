@@ -1,7 +1,9 @@
 <div align="center">
-  <a href="https://dumptyd.github.io/vue-css-donut-chart">
-    <img height="180" src="public/favicon.png">
-  </a>
+  <div align="center">
+    <a href="https://dumptyd.github.io/vue-css-donut-chart">
+      <img height="180" src="public/favicon.png">
+    </a>
+  </div>
   <h2 align="center">vue-css-donut-chart</h2>
   <p align="center">Lightweight Vue component for drawing pure CSS donut charts</p>
 
