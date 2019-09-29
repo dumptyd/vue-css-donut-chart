@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <div class="container-header">
-    <h1>vue-css-donut-chart</h1>
+    <h1>vue-css-donut-chart <sup>{{ version }}</sup></h1>
     <span>Lightweight Vue component for drawing pure CSS donut charts</span>
   </div>
   <nav class="container-nav">
@@ -129,6 +129,7 @@
 <script>
 import Donut from '../Donut.vue';
 import colors from '../../utils/colors';
+import { version } from '../../../package.json';
 import '../../styles/normalize.css';
 import '../../styles/site.css';
 
@@ -176,7 +177,9 @@ export default {
       placementOptions,
       textTypeOptions,
 
-      sections
+      sections,
+
+      version
     };
   },
   computed: {

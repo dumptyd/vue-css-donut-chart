@@ -73,14 +73,19 @@ footer {
   padding: 1rem;
 }
 
+.credit {
+  margin-bottom: .5rem;
+}
+
 .badges {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1rem;
+  flex-wrap: wrap;
 }
+
 .badge {
-  margin: 0 .5rem;
+  margin: .5rem .5rem 0;
 }
 
 label { margin-right: .75rem; }
