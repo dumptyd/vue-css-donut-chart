@@ -3,6 +3,9 @@ node_modules
 dist/demo.html
 docs/
 coverage/
+.github/
+jest.config.js
+tests/
 yarn.lock
 
 # local env files
