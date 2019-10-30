@@ -5,13 +5,13 @@
   "author": "dumptyd <dumptyd2.0@gmail.com>",
   "homepage": "https://dumptyd.github.io/vue-css-donut-chart/",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "yarn clear:babel-cache && MODE=site vue-cli-service build --modern --dest docs",
-    "lint": "vue-cli-service lint",
-    "build-lib": "yarn clear:babel-cache && vue-cli-service build --target lib --name vcdonut src/index.js",
+    "serve": "node ./node_modules/@vue/cli-service/bin/vue-cli-service.js serve",
+    "build": "yarn clear:babel-cache && MODE=site node ./node_modules/@vue/cli-service/bin/vue-cli-service.js build --modern --dest docs",
+    "lint": "node ./node_modules/@vue/cli-service/bin/vue-cli-service.js lint",
+    "build-lib": "yarn clear:babel-cache && node ./node_modules/@vue/cli-service/bin/vue-cli-service.js build --target lib --name vcdonut src/index.js",
     "clear:babel-cache": "rm -rf ./node_modules/.cache/babel-loader/*",
-    "test": "vue-cli-service test:unit",
-    "test:coverage": "vue-cli-service test:unit --coverage"
+    "test": "node ./node_modules/@vue/cli-service/bin/vue-cli-service.js test:unit",
+    "test:coverage": "node ./node_modules/@vue/cli-service/bin/vue-cli-service.js test:unit --coverage"
   },
   "main": "dist/vcdonut.umd.js",
   "module": "dist/vcdonut.common.js",
