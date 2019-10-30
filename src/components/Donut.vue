@@ -50,6 +50,9 @@ export default {
     // text in the middle of the donut, this can also be passed using the default slot
     text: { type: String, default: null },
 
+    // text in the middle of the donut, this can also be passed using the default slot
+    textResize: { type: Boolean, default: true },
+
     // color to use for the middle of the donut
     // set this to `transparent` or `thickness` to 100 to make a pie chart instead
     background: { type: String, default: '#ffffff' },
@@ -187,6 +190,8 @@ export default {
       };
     },
     donutTextStyles() {
+      if (!this.textResize) return {};
+
       const { fontSize } = this;
       return { fontSize };
     }
