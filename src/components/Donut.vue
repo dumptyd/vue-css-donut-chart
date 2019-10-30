@@ -4,7 +4,9 @@
     <donut-sections
       :sections="donutSections"
       :start-angle="startAngle"
-      @section-click="emitSectionClick">
+      @section-click="emitSectionClick"
+      @mouseenter="sectionLegendMouseEnter"
+      @mouseleave="sectionLegendMouseLeave">
     </donut-sections>
     <div class="cdc-overlay" :style="overlayStyles">
       <div class="cdc-text" :style="donutTextStyles">
@@ -15,7 +17,7 @@
 
   <slot name="legend">
     <div class="cdc-legend" v-if="hasLegend" :style="placementStyles.legend">
-      <span class="cdc-legend-item" v-for="(item, idx) in legend" :key="idx" :title="item.percent">
+      <span class="cdc-legend-item" :class="item.classes" v-for="(item, idx) in legend" :key="idx" :title="item.percent" @mouseenter="sectionLegendMouseEnter(idx)" @mouseleave="sectionLegendMouseLeave(idx)">
         <span class="cdc-legend-item-color" :style="item.styles"></span>
         <span>{{ item.label }}</span>
       </span>
@@ -78,6 +80,9 @@ export default {
       validator: val => !!placement[val.toUpperCase()]
     },
 
+    // class set on section and legend on hover
+    sectionHoverClass: { type: String, default: '' },
+
     // degree angle at which the first section begins
     startAngle: { type: Number, default: 0 }
   },
@@ -94,7 +99,8 @@ export default {
       donutEl: null,
       fontSize: '1em',
 
-      resizeListener: null
+      resizeListener: null,
+      sectionHoverIndex: null
     };
   },
   computed: {
@@ -111,7 +117,7 @@ export default {
       let currentDefaultColorIdx = 0;
 
       const sections = [];
-      this.sections.forEach(section => {
+      this.sections.forEach((section, idx) => {
         const valToDeg = degreesInACircle * (section.value / this.total);
 
         let degreeArr = [valToDeg];
@@ -128,12 +134,12 @@ export default {
             const remainingDegreesInCurrentSection = degreesInASection - consumedDegrees;
 
             sections.push(
-              { ...section, degree: remainingDegreesInCurrentSection, color, $section: section },
-              { ...section, degree: degree - remainingDegreesInCurrentSection, color, $section: section }
+              { ...section, degree: remainingDegreesInCurrentSection, color, $section: section, hover: this.sectionHoverIndex === idx },
+              { ...section, degree: degree - remainingDegreesInCurrentSection, color, $section: section, hover: this.sectionHoverIndex === idx }
             );
           }
           else {
-            sections.push({ ...section, degree, color, $section: section });
+            sections.push({ ...section, degree, color, $section: section, hover: this.sectionHoverIndex === idx });
           }
 
           consumedDegrees += degree;
@@ -155,7 +161,8 @@ export default {
         percent: `${section.value} (${(section.value / this.total) * 100}%)`,
         styles: {
           backgroundColor: section.color || defaultColors[currentDefaultColorIdx++]
-        }
+        },
+        classes: this.sectionHoverIndex === idx ? this.sectionHoverClass : ''
       }));
     },
     placementStyles() {
@@ -208,6 +215,14 @@ export default {
     },
     emitSectionClick(section) {
       this.$emit('section-click', section);
+    },
+    sectionLegendMouseEnter(idx) {
+      this.sectionHoverIndex = idx;
+    },
+    sectionLegendMouseLeave(idx) {
+      if (this.sectionHoverIndex === idx) {
+        this.sectionHoverIndex = -1;
+      }
     }
   },
   mounted() {

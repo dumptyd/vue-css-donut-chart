@@ -3,7 +3,9 @@
   <div
     class="cdc-section" v-for="(section, idx) in donutSections"
     :key="idx" :class="section.className" :style="section.sectionStyles"
-    @click="emitClick(sections[idx])">
+    @click="emitClick(sections[idx])"
+    @mouseenter="emitMouseEnter(idx)"
+    @mouseleave="emitMouseLeave(idx)">
     <div class="cdc-filler" :style="section.fillerStyles" :title="section.label"></div>
   </div>
 </div>
@@ -52,7 +54,7 @@ export default {
         if (degreesConsumed === 180) offsetBy = 0;
         else offsetBy += section.degree;
 
-        return { label: section.label, className, fillerStyles, sectionStyles };
+        return { label: section.label, className: className + (section.hover ? ' ' + this.$parent.sectionHoverClass : ''), fillerStyles, sectionStyles };
       });
 
       return sections;
@@ -61,6 +63,12 @@ export default {
   methods: {
     emitClick(section) {
       this.$emit('section-click', section.$section);
+    },
+    emitMouseEnter(idx) {
+      this.$emit('mouseenter', idx);
+    },
+    emitMouseLeave(idx, $event) {
+      this.$emit('mouseleave', idx);
     }
   }
 };
