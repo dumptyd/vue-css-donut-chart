@@ -377,6 +377,29 @@ describe('Donut component', () => {
       expect(oldfontSize).not.toEqual(newfontSize);
     });
 
+    it('does not trigger font-size recalculation when the window is resized/zoomed if font-size recalculation is turned off', async () => {
+      const wrapper = shallowMount(Donut, { propsData: { size: 50, textResize: false } });
+      const { vm } = wrapper;
+
+      let clientWidth = 250;
+      jest.spyOn(vm.donutEl, 'clientWidth', 'get').mockImplementation(() => clientWidth);
+
+      // trigger recalcFontSize so it accesses `clientWidth` this time
+      wrapper.setProps({ unit: '%' });
+      await vm.$nextTick();
+
+      const oldDonutTextStyles = wrapper.vm.donutTextStyles;
+
+      // trigger resize and update the clientWidth
+      clientWidth = 350;
+      triggerResize();
+      await vm.$nextTick();
+
+      const newDonutTextStyles = vm.donutTextStyles;
+
+      expect(oldDonutTextStyles).toEqual(newDonutTextStyles);
+    });
+
     it('removes the resize listener from window when the component is destroyed', () => {
       const wrapper = shallowMount(Donut);
       const removeListener = jest.spyOn(window, 'removeEventListener');
