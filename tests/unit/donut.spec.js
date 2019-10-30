@@ -296,7 +296,7 @@ describe('Donut component', () => {
     it('section and legend get sectionHoverClass on section mouseenter', () => {
       const sections = [10, 20, 30].map(value => ({ value }));
       const wrapper = mount(Donut, { propsData: { sections, hasLegend: true, sectionHoverClass: 'abc' } });
-      
+
       const sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
       const legendWrappers = wrapper.findAll(el.LEGEND_ITEM);
 
@@ -316,7 +316,7 @@ describe('Donut component', () => {
 
       sections.forEach((section, idx) => {
         sectionWrappers.at(idx).trigger('mouseenter');
-        sections.forEach((section, index) => {
+        sections.forEach((innerSection, index) => {
           if (index !== idx) expect(sectionWrappers.at(index).classes()).not.toContain('abc');
           if (index !== idx) expect(legendWrappers.at(index).classes()).not.toContain('abc');
         });
@@ -361,7 +361,7 @@ describe('Donut component', () => {
 
       sections.forEach((section, idx) => {
         legendWrappers.at(idx).trigger('mouseenter');
-        sections.forEach((section, index) => {
+        sections.forEach((innerSection, index) => {
           if (index !== idx) expect(sectionWrappers.at(index).classes()).not.toContain('abc');
           if (index !== idx) expect(legendWrappers.at(index).classes()).not.toContain('abc');
         });

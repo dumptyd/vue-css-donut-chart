@@ -54,7 +54,12 @@ export default {
         if (degreesConsumed === 180) offsetBy = 0;
         else offsetBy += section.degree;
 
-        return { label: section.label, className: className + (section.hover ? ' ' + this.$parent.sectionHoverClass : ''), fillerStyles, sectionStyles };
+        return {
+          label: section.label,
+          className: className + (section.hover ? ` ${this.$parent.sectionHoverClass}` : ''),
+          fillerStyles,
+          sectionStyles
+        };
       });
 
       return sections;
@@ -67,7 +72,7 @@ export default {
     emitMouseEnter(idx) {
       this.$emit('mouseenter', idx);
     },
-    emitMouseLeave(idx, $event) {
+    emitMouseLeave(idx) {
       this.$emit('mouseleave', idx);
     }
   }

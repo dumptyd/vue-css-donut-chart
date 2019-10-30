@@ -17,7 +17,13 @@
 
   <slot name="legend">
     <div class="cdc-legend" v-if="hasLegend" :style="placementStyles.legend">
-      <span class="cdc-legend-item" :class="item.classes" v-for="(item, idx) in legend" :key="idx" :title="item.percent" @mouseenter="sectionLegendMouseEnter(idx)" @mouseleave="sectionLegendMouseLeave(idx)">
+      <span class="cdc-legend-item"
+            :class="item.classes"
+            v-for="(item, idx) in legend"
+            :key="idx"
+            :title="item.percent"
+            @mouseenter="sectionLegendMouseEnter(idx)"
+            @mouseleave="sectionLegendMouseLeave(idx)">
         <span class="cdc-legend-item-color" :style="item.styles"></span>
         <span>{{ item.label }}</span>
       </span>
@@ -134,12 +140,30 @@ export default {
             const remainingDegreesInCurrentSection = degreesInASection - consumedDegrees;
 
             sections.push(
-              { ...section, degree: remainingDegreesInCurrentSection, color, $section: section, hover: this.sectionHoverIndex === idx },
-              { ...section, degree: degree - remainingDegreesInCurrentSection, color, $section: section, hover: this.sectionHoverIndex === idx }
+              {
+                ...section,
+                degree: remainingDegreesInCurrentSection,
+                color,
+                $section: section,
+                hover: this.sectionHoverIndex === idx
+              },
+              {
+                ...section,
+                degree: degree - remainingDegreesInCurrentSection,
+                color,
+                $section: section,
+                hover: this.sectionHoverIndex === idx
+              }
             );
           }
           else {
-            sections.push({ ...section, degree, color, $section: section, hover: this.sectionHoverIndex === idx });
+            sections.push({
+              ...section,
+              degree,
+              color,
+              $section: section,
+              hover: this.sectionHoverIndex === idx
+            });
           }
 
           consumedDegrees += degree;
