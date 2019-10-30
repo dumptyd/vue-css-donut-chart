@@ -201,6 +201,7 @@ Making the component look like a pie chart is as simple as setting the `thicknes
 | `section.value` | Number | **Yes** | &ndash; | Value of the section. The component determines what percent of the donut should be taken by a section based on this value and the `total` prop. Sum of all the sections' `value` should not exceed `total`, an error is thrown otherwise. |
 | `section.color` | String | Read description | Read description | Color of the section. The component comes with 24 predefined colors, so this property is optional if you have <= 24 sections without the `color` property. |
 | `section.label` | String | No | `'Section <section number>'` | Name of the section. This is used in the legend as well as the tooltip text of the section. |
+| `sectionHoverClass` | String | No | &ndash; | Class added to sections/legends on hover on that specific section/legend (cross-added) |
 
 
 #### Events
