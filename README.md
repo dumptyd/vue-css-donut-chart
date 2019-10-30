@@ -191,6 +191,7 @@ Making the component look like a pie chart is as simple as setting the `thicknes
 | `unit` | String | No | `'px'` | Unit to use for `size`. Can be any valid CSS unit. Use `%` to make the donut responsive. |
 | `thickness` | Number | No | `20` | Percent thickness of the donut ring relative to `size`. Can be any positive value between 0-100 (inclusive). Set this to 0 to draw a pie chart instead. |
 | `text` | String | No | &ndash; | Text to show in the middle of the donut. This can also be provided through the default slot. |
+| `textResize` | Boolean | No | true | Whether to automatically resize text based on width or not. |
 | `background` | String | No | `'#ffffff'` | Background color of the donut. In most cases, this should be the background color of the parent element. |
 | `foreground` | String | No | `'#eeeeee'` | Foreground color of the donut. This is the color that is shown for empty region of the donut ring. |
 | `start-angle` | Number | No | `0` | Angle measure in degrees where the first section should start. |
