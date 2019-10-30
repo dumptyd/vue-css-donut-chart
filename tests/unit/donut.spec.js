@@ -292,7 +292,7 @@ describe('Donut component', () => {
     });
   });
 
-  describe.only('"sectionHoverClass" prop', () => {
+  describe('"sectionHoverClass" prop', () => {
     it('section and legend get sectionHoverClass on section mouseenter', () => {
       const sections = [10, 20, 30].map(value => ({ value }));
       const wrapper = mount(Donut, { propsData: { sections, hasLegend: true, sectionHoverClass: 'abc' } });
