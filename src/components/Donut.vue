@@ -99,7 +99,7 @@ export default {
   },
   computed: {
     donutSections() {
-      const valueTotal = this.sections.reduce((a, c) => a + c.value, 0);
+      const valueTotal = +(this.sections.reduce((a, c) => a + c.value, 0)).toFixed(2);
       if (valueTotal > this.total) {
         const err = `Sum of all the sections' values (${valueTotal}) should not exceed \`total\` (${this.total})`;
         throw new Error(err);
