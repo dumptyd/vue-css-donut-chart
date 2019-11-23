@@ -12,13 +12,13 @@
   </nav>
   <div class="container-donut">
     <donut
+      v-on="listeners"
       :background="background" :foreground="foreground"
       :size="size" :unit="unit" :thickness="thickness"
       :hasLegend="hasLegend" :legendPlacement="legendPlacement"
       :sections="validatedSections"
       :total="total"
-      :start-angle="startAngle"
-      @section-click="handleSectionClick">
+      :start-angle="startAngle">
       <div v-html="donutHTML"></div>
     </donut>
   </div>
@@ -63,7 +63,7 @@
         <div class="control-group">
           <div class="control">
             <label for="has-legend">Has legend?</label>
-            <input name="has-legend" type="checkbox" v-model="hasLegend">
+            <input id="has-legend" type="checkbox" v-model="hasLegend">
           </div>
           <div class="control">
             <label for="placement">Legend Placement</label>
@@ -88,6 +88,20 @@
         </div>
       </div>
       <!-- end donut content -->
+
+      <!-- section events -->
+      <div>
+        <h3>Section events</h3>
+        <div class="control-group">
+          <div class="control" v-for="event in events" :key="event.sectionEventName">
+            <label :for="`${event.sectionEventName}-checkbox`">{{ event.sectionEventName }}</label>
+            <input :id="`${event.sectionEventName}-checkbox`" type="checkbox" v-model="event.enabled">
+          </div>
+        </div>
+
+        <div class="note">Checked events will log to console when they're triggered.</div>
+      </div>
+      <!-- end section events -->
 
       <!-- donut sections -->
       <div class="donut-sections">
@@ -129,15 +143,18 @@
 <script>
 import Donut from '../Donut.vue';
 import colors from '../../utils/colors';
+import { nativeSectionEvents } from '../../utils/events';
 import { version } from '../../../package.json';
 import '../../styles/normalize.css';
 import '../../styles/site.css';
 
-function getRandomIntInclusive(min, max) {
+const getRandomIntInclusive = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
+
+const getObjectWithoutReactiveKeys = obj => JSON.parse(JSON.stringify(obj));
 
 export default {
   data() {
@@ -156,6 +173,12 @@ export default {
     }));
 
     const initialConsumed = sections.reduce((a, c) => a + c.value, 0);
+
+    const initiallyEnabledEvents = ['click'];
+    const events = nativeSectionEvents.map(event => ({
+      ...event,
+      enabled: initiallyEnabledEvents.includes(event.nativeEventName)
+    }));
 
     return {
       background: '#ffffff',
@@ -178,6 +201,7 @@ export default {
       textTypeOptions,
 
       sections,
+      events,
 
       version
     };
@@ -192,6 +216,12 @@ export default {
     validatedSections() {
       if (this.consumed > this.total) return [];
       return this.sections;
+    },
+    listeners() {
+      return this.events.filter(event => event.enabled).reduce((acc, curr) => ({
+        ...acc,
+        [curr.sectionEventName]: (...args) => this.handleSectionEvent(curr, ...args)
+      }), {});
     }
   },
   methods: {
@@ -205,8 +235,15 @@ export default {
     removeSection(idx) {
       this.sections.splice(idx, 1);
     },
-    handleSectionClick(section) {
-      window.alert(`${section.label || 'Section'} clicked`);
+    handleSectionEvent({ sectionEventName }, section, event) {
+      const info = [
+        ['-'.repeat(10)],
+        [`"${sectionEventName}" occurred on "${section.label || 'Unnamed section'}"`],
+        ['Section object:', getObjectWithoutReactiveKeys(section)],
+        ['Native event:', event]
+      ];
+      // eslint-disable-next-line no-console
+      info.forEach(args => console.log(...args));
     }
   },
   components: { Donut }

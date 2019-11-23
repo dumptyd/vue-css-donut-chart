@@ -1,5 +1,6 @@
 import { shallowMount, mount } from '@vue/test-utils';
 import colors from '../../src/utils/colors';
+import { nativeSectionEvents } from '../../src/utils/events';
 import { placementStyles } from '../../src/utils/misc';
 import { el, hextToCssRgb, triggerResize } from '../utils';
 import Donut from '../../src/components/Donut.vue';
@@ -304,34 +305,54 @@ describe('Donut component', () => {
     });
   });
 
-  describe('"section-click" event', () => {
-    it('emits the "section-click" event with correct payload', () => {
-      const sections = [
-        { name: 'section-1', value: 10 },
-        { name: 'section-2', value: 10 },
-        { name: 'section-3', value: 10 }
-      ];
-      const sectionsCopy = [
-        { name: 'section-1', value: 10 },
-        { name: 'section-2', value: 10 },
-        { name: 'section-3', value: 10 }
-      ];
+  describe('section events', () => {
+    nativeSectionEvents.forEach(({ nativeEventName, sectionEventName }) => {
+      it(`emits the "${sectionEventName}" event with correct payload when native "${nativeEventName}" occurs`, () => {
+        const sections = [
+          { name: 'section-1', value: 10 },
+          { name: 'section-2', value: 10 },
+          { name: 'section-3', value: 10 }
+        ];
+        const sectionsCopy = [
+          { name: 'section-1', value: 10 },
+          { name: 'section-2', value: 10 },
+          { name: 'section-3', value: 10 }
+        ];
 
+        const wrapper = mount(Donut, { propsData: { sections } });
+        const sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
+
+        sections.forEach((section, idx) => {
+          // trigger the native event on section
+          sectionWrappers.at(idx).trigger(nativeEventName);
+          const sectionEvent = wrapper.emitted(sectionEventName);
+          const [calledWithSection, nativeEvent] = sectionEvent[idx];
+
+          // assert that correct number of events have been emitted
+          expect(sectionEvent).toHaveLength(idx + 1);
+          // assert that the object passed by the user is the one that's returned back and not the internal one
+          expect(calledWithSection).toBe(section);
+          // and the object hasn't been mutated
+          expect(calledWithSection).toStrictEqual(sectionsCopy[idx]);
+          // and the second argument is the native event
+          expect(nativeEvent).toBeInstanceOf(Event);
+        });
+      });
+    });
+
+    // sections with value: 0 are rendered in the DOM with width: 0, however native events like
+    // mouseover/mouseenter/mouseleave still sometimes occur on these sections but we want to make
+    // sure these don't emit corresponding section-* events.
+    it('does not emit section events when the native events occur on a section with value set to 0', () => {
+      const zeroSection = { name: 'section-1', value: 0 };
+      const sections = [zeroSection];
       const wrapper = mount(Donut, { propsData: { sections } });
-      const sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
+      const sectionWrapper = wrapper.find(el.DONUT_SECTION);
 
-      sections.forEach((section, idx) => {
-        // click the section
-        sectionWrappers.at(idx).trigger('click');
-        const sectionClickEvent = wrapper.emitted('section-click');
-        const calledWithSection = sectionClickEvent[idx][0];
-
-        // assert that correct number of click events have been emitted
-        expect(sectionClickEvent).toHaveLength(idx + 1);
-        // assert that the object passed by the user is the one that's returned back and not the internal one
-        expect(calledWithSection).toBe(section);
-        // and the object hasn't been mutated
-        expect(calledWithSection).toStrictEqual(sectionsCopy[idx]);
+      // make sure none of the section-* events are emitted for value:0 sections
+      nativeSectionEvents.forEach(({ nativeEventName, sectionEventName }) => {
+        sectionWrapper.trigger(nativeEventName);
+        expect(wrapper.emitted(sectionEventName)).toBeFalsy();
       });
     });
   });

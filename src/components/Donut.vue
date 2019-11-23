@@ -2,9 +2,9 @@
 <div class="cdc-container" :style="placementStyles.container">
   <div class="cdc" ref="donut" :style="donutStyles">
     <donut-sections
+      v-on="sectionListeners"
       :sections="donutSections"
-      :start-angle="startAngle"
-      @section-click="emitSectionClick">
+      :start-angle="startAngle">
     </donut-sections>
     <div class="cdc-overlay" :style="overlayStyles">
       <div class="cdc-text" :style="donutTextStyles">
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { nativeSectionEvents } from '../utils/events';
 import defaultColors from '../utils/colors';
 import { placement, placementStyles, sectionValidator } from '../utils/misc';
 import DonutSections from './DonutSections.vue';
@@ -190,6 +191,12 @@ export default {
     donutTextStyles() {
       const { fontSize } = this;
       return { fontSize };
+    },
+    sectionListeners() {
+      return nativeSectionEvents.reduce((acc, { sectionEventName }) => ({
+        ...acc,
+        [sectionEventName]: (...args) => this.emitSectionEvent(sectionEventName, ...args)
+      }), {});
     }
   },
   methods: {
@@ -207,8 +214,8 @@ export default {
         this.fontSize = widthInPx ? `${(widthInPx * scaleDownBy).toFixed(2)}px` : '1em';
       });
     },
-    emitSectionClick(section) {
-      this.$emit('section-click', section);
+    emitSectionEvent(sectionEventName, ...args) {
+      this.$emit(sectionEventName, ...args);
     }
   },
   mounted() {
