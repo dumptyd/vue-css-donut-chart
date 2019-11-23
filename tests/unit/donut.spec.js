@@ -120,7 +120,7 @@ describe('Donut component', () => {
   });
 
   describe('"sections" prop', () => {
-    it('renders the proper number of sections based on the section prop', () => {
+    it('renders correct number of sections based on the sections prop', () => {
       let sections = [
         { value: 25 },
         { value: 25 },
@@ -152,6 +152,20 @@ describe('Donut component', () => {
       sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
       // since one section takes up more than 180 degrees, it should be split into 2
       expect(sectionWrappers).toHaveLength(sections.length + 1);
+    });
+
+    it('renders correct number of sections while accounting for floating-point arithmetic issues', () => {
+      // when using these values for sections and size, the component used to render 6 sections
+      // because of floating point issues. That should never happen - the component should at
+      // maximum have `sections.length + 1` sections.
+      const [fpaValues, fpaSize] = [[33, 33, 33, 1], 201];
+      const sections = fpaValues.map(value => ({ value }));
+
+      const wrapper = mount(Donut, { propsData: { sections, size: fpaSize } });
+      const sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
+
+      // it should have 5 sections since the second 33 would get split into two sections
+      expect(sectionWrappers).toHaveLength(5);
     });
 
     // eslint-disable-next-line max-len
@@ -218,6 +232,23 @@ describe('Donut component', () => {
       finally {
         expect(errorThrown).toBe(true);
         spy.mockRestore();
+      }
+    });
+
+    it('accounts for floating-point arithmetic issues before throwing an error', () => {
+      // when using these values in this order, validation logic used to throw an error
+      const fpaValues = [8.2, 34.97, 30.6, 26.23];
+      const [total, sections] = [100, fpaValues.map(value => ({ value }))];
+
+      let errorThrown = false;
+      try {
+        shallowMount(Donut, { propsData: { total, sections } });
+      }
+      catch (error) {
+        errorThrown = true;
+      }
+      finally {
+        expect(errorThrown).toBe(false);
       }
     });
   });
