@@ -123,7 +123,8 @@ export default {
         const color = section.color || defaultColors[currentDefaultColorIdx++];
 
         degreeArr.forEach(degree => {
-          const consumedWithCurrent = consumedDegrees + degree;
+          // +(n).toFixed(2) is a fix for Floating-Point Problems
+          const consumedWithCurrent = +(consumedDegrees + degree).toFixed(2);
           if (consumedWithCurrent > degreesInASection) {
             const remainingDegreesInCurrentSection = degreesInASection - consumedDegrees;
 
