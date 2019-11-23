@@ -206,7 +206,7 @@ Making the component look like a pie chart is as simple as setting the `thicknes
 
 #### Events
 
-All the `section-*` events are called with the `section` object on which the event occurred and the native `Event` object as arguments respectively. Consider adding a custom property (eg: `name`) to the `section` objects to uniquely identify them.
+All the `section-*` listeners are called with the `section` object on which the event occurred and the native `Event` object as arguments respectively. Consider adding a custom property (eg: `name`) to the `section` objects to uniquely identify them.
 
 | Event | Parameter | Description |
 | ---------- | ------------ | ----------- |
