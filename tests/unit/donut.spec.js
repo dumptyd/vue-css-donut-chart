@@ -198,6 +198,25 @@ describe('Donut component', () => {
       expect(sectionFillerWrappers.at(1).attributes('title')).toBe(sections[1].label);
       expect(sectionFillerWrappers.at(2).attributes('title')).toBeFalsy(); // no default title
     });
+
+    it('does not run into error when section.value is not of number type', () => {
+      const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+      const sections = [{ value: 10 }, { value: '' }];
+
+      let error = false;
+      try {
+        shallowMount(Donut, { propsData: { sections } });
+      }
+      catch (err) {
+        error = err;
+      }
+      finally {
+        expect(error).toBeFalsy();
+        spy.mockRestore();
+        // eslint-disable-next-line no-console
+        if (error) console.error(error);
+      }
+    });
   });
 
   describe('"total" prop', () => {
