@@ -103,6 +103,10 @@ input, select, textarea, button {
   border-radius: 5px;
   display: inline-block;
 }
+input:invalid, select:invalid, textarea:invalid {
+  box-shadow: 0 0 10px 2px tomato;
+  z-index: 1;
+}
 input[type=color] {
   height: 2.5rem;
   padding: 0;
