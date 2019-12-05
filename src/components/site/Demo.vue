@@ -11,14 +11,7 @@
     <a href="https://github.com/dumptyd/vue-css-donut-chart">GitHub</a>
   </nav>
   <div class="container-donut">
-    <donut
-      v-on="listeners"
-      :background="background" :foreground="foreground"
-      :size="size" :unit="unit" :thickness="thickness"
-      :hasLegend="hasLegend" :legendPlacement="legendPlacement"
-      :sections="validatedSections"
-      :total="total"
-      :start-angle="startAngle">
+    <donut v-on="listeners" v-bind="donutProps">
       <div v-html="donutHTML"></div>
     </donut>
   </div>
@@ -38,7 +31,7 @@
           </div>
           <div class="control">
             <label for="size">Size</label>
-            <input name="size" type="number" class="sm" v-model.number="size">
+            <input name="size" type="number" class="sm" min="1" v-model.number="size">
             <select v-model="unit">
               <option v-for="option in unitOptions" :key="option" :value="option">
                 {{ option }}
@@ -114,8 +107,7 @@
             <label :for="`section-value-${idx + 1}`">Value</label>
             <input
               class="sm" name="`section-value-${idx + 1}`" :min="0" :max="section.value + remaining"
-              type="number" v-model.number="section.value"
-            >
+              type="number" v-model.number="section.value">
           </div>
           <div class="control">
             <label :for="`section-label-${idx + 1}`">Label</label>
@@ -155,6 +147,7 @@ const getRandomIntInclusive = (min, max) => {
 };
 
 const getObjectWithoutReactiveKeys = obj => JSON.parse(JSON.stringify(obj));
+const toFixed = num => Number(Number(num).toFixed(2));
 
 export default {
   data() {
@@ -207,6 +200,25 @@ export default {
     };
   },
   computed: {
+    donutProps() {
+      const {
+        background, foreground,
+        size, unit, thickness,
+        hasLegend, legendPlacement,
+        validatedSections, total,
+        startAngle
+      } = this;
+      const [computedSize, computedThickness, computedTotal, computedStartAngle] =
+        [size, thickness, total, startAngle].map(val => toFixed(val));
+      return {
+        background, foreground,
+        size: computedSize > 0 ? computedSize : 200, unit,
+        thickness: computedThickness >= 0 && computedThickness <= 100 ? computedThickness : 20,
+        hasLegend, legendPlacement,
+        sections: validatedSections, total: computedTotal > 0 ? computedTotal : 100,
+        startAngle: computedStartAngle || 0
+      };
+    },
     consumed() {
       return this.sections.reduce((a, c) => a + c.value, 0);
     },
@@ -214,7 +226,11 @@ export default {
       return this.total - this.consumed;
     },
     validatedSections() {
-      if (this.consumed > this.total) return [];
+      const { consumed, total } = this;
+      if (
+        [consumed, total].some(val => typeof val !== 'number') ||
+        toFixed(this.consumed) > toFixed(this.total)
+      ) return [];
       return this.sections;
     },
     listeners() {
