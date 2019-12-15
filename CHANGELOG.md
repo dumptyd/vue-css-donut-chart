@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0]
+
+### Added
+
+- Adds the following new events (#26)
+  - `section-mouseenter`
+  - `section-mouseleave`
+  - `section-mouseover`
+  - `section-mouseout`
+  - `section-mousemove`
+- All the `section-*` events are now emitted with the native `Event` object as the second parameter.
+
+### Fixed
+
+- A floating-point arithmetic issue was causing the section rendering logic to behave in unexpected ways. This has been fixed. (#23)
+- Another floating-point arithmetic issue was causing the `total` prop's validator to incorrectly flag valid values. This has been fixed as well. (#24)
+
+### Other changes
+
+- Demo page now has a section dedicated for testing all the exposed events.
+- Documentation has been updated with new events.
+
 ## [1.1.6]
 ## [1.1.5]
 

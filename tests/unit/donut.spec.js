@@ -1,5 +1,6 @@
 import { shallowMount, mount } from '@vue/test-utils';
 import colors from '../../src/utils/colors';
+import { nativeSectionEvents } from '../../src/utils/events';
 import { placementStyles } from '../../src/utils/misc';
 import { el, hextToCssRgb, triggerResize } from '../utils';
 import Donut from '../../src/components/Donut.vue';
@@ -119,7 +120,7 @@ describe('Donut component', () => {
   });
 
   describe('"sections" prop', () => {
-    it('renders the proper number of sections based on the section prop', () => {
+    it('renders correct number of sections based on the sections prop', () => {
       let sections = [
         { value: 25 },
         { value: 25 },
@@ -153,6 +154,20 @@ describe('Donut component', () => {
       expect(sectionWrappers).toHaveLength(sections.length + 1);
     });
 
+    it('renders correct number of sections while accounting for floating-point arithmetic issues', () => {
+      // when using these values for sections and size, the component used to render 6 sections
+      // because of floating point issues. That should never happen - the component should at
+      // maximum have `sections.length + 1` sections.
+      const [fpaValues, fpaSize] = [[33, 33, 33, 1], 201];
+      const sections = fpaValues.map(value => ({ value }));
+
+      const wrapper = mount(Donut, { propsData: { sections, size: fpaSize } });
+      const sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
+
+      // it should have 5 sections since the second 33 would get split into two sections
+      expect(sectionWrappers).toHaveLength(5);
+    });
+
     // eslint-disable-next-line max-len
     it('renders the sections with correct colors and plugs in default colors if one isn\'t specified with the "color" property', () => {
       const sections = [
@@ -182,6 +197,25 @@ describe('Donut component', () => {
       expect(sectionFillerWrappers.at(0).attributes('title')).toBe(sections[0].label);
       expect(sectionFillerWrappers.at(1).attributes('title')).toBe(sections[1].label);
       expect(sectionFillerWrappers.at(2).attributes('title')).toBeFalsy(); // no default title
+    });
+
+    it('does not run into error when section.value is not of number type', () => {
+      const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+      const sections = [{ value: 10 }, { value: '' }];
+
+      let error = false;
+      try {
+        shallowMount(Donut, { propsData: { sections } });
+      }
+      catch (err) {
+        error = err;
+      }
+      finally {
+        expect(error).toBeFalsy();
+        spy.mockRestore();
+        // eslint-disable-next-line no-console
+        if (error) console.error(error);
+      }
     });
   });
 
@@ -217,6 +251,23 @@ describe('Donut component', () => {
       finally {
         expect(errorThrown).toBe(true);
         spy.mockRestore();
+      }
+    });
+
+    it('accounts for floating-point arithmetic issues before throwing an error', () => {
+      // when using these values in this order, validation logic used to throw an error
+      const fpaValues = [8.2, 34.97, 30.6, 26.23];
+      const [total, sections] = [100, fpaValues.map(value => ({ value }))];
+
+      let errorThrown = false;
+      try {
+        shallowMount(Donut, { propsData: { total, sections } });
+      }
+      catch (error) {
+        errorThrown = true;
+      }
+      finally {
+        expect(errorThrown).toBe(false);
       }
     });
   });
@@ -304,34 +355,54 @@ describe('Donut component', () => {
     });
   });
 
-  describe('"section-click" event', () => {
-    it('emits the "section-click" event with correct payload', () => {
-      const sections = [
-        { name: 'section-1', value: 10 },
-        { name: 'section-2', value: 10 },
-        { name: 'section-3', value: 10 }
-      ];
-      const sectionsCopy = [
-        { name: 'section-1', value: 10 },
-        { name: 'section-2', value: 10 },
-        { name: 'section-3', value: 10 }
-      ];
+  describe('section events', () => {
+    nativeSectionEvents.forEach(({ nativeEventName, sectionEventName }) => {
+      it(`emits the "${sectionEventName}" event with correct payload when native "${nativeEventName}" occurs`, () => {
+        const sections = [
+          { name: 'section-1', value: 10 },
+          { name: 'section-2', value: 10 },
+          { name: 'section-3', value: 10 }
+        ];
+        const sectionsCopy = [
+          { name: 'section-1', value: 10 },
+          { name: 'section-2', value: 10 },
+          { name: 'section-3', value: 10 }
+        ];
 
+        const wrapper = mount(Donut, { propsData: { sections } });
+        const sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
+
+        sections.forEach((section, idx) => {
+          // trigger the native event on section
+          sectionWrappers.at(idx).trigger(nativeEventName);
+          const sectionEvent = wrapper.emitted(sectionEventName);
+          const [calledWithSection, nativeEvent] = sectionEvent[idx];
+
+          // assert that correct number of events have been emitted
+          expect(sectionEvent).toHaveLength(idx + 1);
+          // assert that the object passed by the user is the one that's returned back and not the internal one
+          expect(calledWithSection).toBe(section);
+          // and the object hasn't been mutated
+          expect(calledWithSection).toStrictEqual(sectionsCopy[idx]);
+          // and the second argument is the native event
+          expect(nativeEvent).toBeInstanceOf(Event);
+        });
+      });
+    });
+
+    // sections with value: 0 are rendered in the DOM with width: 0, however native events like
+    // mouseover/mouseenter/mouseleave still sometimes occur on these sections but we want to make
+    // sure these don't emit corresponding section-* events.
+    it('does not emit section events when the native events occur on a section with value set to 0', () => {
+      const zeroSection = { name: 'section-1', value: 0 };
+      const sections = [zeroSection];
       const wrapper = mount(Donut, { propsData: { sections } });
-      const sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
+      const sectionWrapper = wrapper.find(el.DONUT_SECTION);
 
-      sections.forEach((section, idx) => {
-        // click the section
-        sectionWrappers.at(idx).trigger('click');
-        const sectionClickEvent = wrapper.emitted('section-click');
-        const calledWithSection = sectionClickEvent[idx][0];
-
-        // assert that correct number of click events have been emitted
-        expect(sectionClickEvent).toHaveLength(idx + 1);
-        // assert that the object passed by the user is the one that's returned back and not the internal one
-        expect(calledWithSection).toBe(section);
-        // and the object hasn't been mutated
-        expect(calledWithSection).toStrictEqual(sectionsCopy[idx]);
+      // make sure none of the section-* events are emitted for value:0 sections
+      nativeSectionEvents.forEach(({ nativeEventName, sectionEventName }) => {
+        sectionWrapper.trigger(nativeEventName);
+        expect(wrapper.emitted(sectionEventName)).toBeFalsy();
       });
     });
   });

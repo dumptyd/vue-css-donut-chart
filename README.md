@@ -141,8 +141,7 @@ This will create a donut with 2 sections that take up 25% each.
     has-legend legend-placement="top"
     :sections="sections" :total="100"
     :start-angle="0"
-    @section-click="handleSectionClick"
-  >
+    @section-click="handleSectionClick">
     <h1>75%</h1>
   </vc-donut>
 </template>
@@ -158,13 +157,15 @@ This will create a donut with 2 sections that take up 25% each.
       };
     },
     methods: {
-      handleSectionClick(section) {
+      handleSectionClick(section, event) {
         console.log(`${section.label} clicked.`);
       }
     }
   };
 </script>
 ```
+
+For brevity, only the `section-click` event is demonstrated in the above example. You can use all the other `section-*` events the same way.
 
 #### Using the component as a pie chart
 
@@ -205,15 +206,22 @@ Making the component look like a pie chart is as simple as setting the `thicknes
 
 #### Events
 
+All the `section-*` listeners are called with the `section` object on which the event occurred and the native `Event` object as arguments respectively. Consider adding a custom property (eg: `name`) to the `section` objects to uniquely identify them.
+
 | Event | Parameter | Description |
 | ---------- | ------------ | ----------- |
-| `section-click` | `section` object | Emitted when a section is clicked. `section` object of the clicked section is passed as an argument. Consider adding a custom property (eg: `name`) to the `section` objects to uniquely identify them. |
+| `section-click` | `section`, `event` | Emitted when a section is clicked. |
+| `section-mouseenter` | `section`, `event` | Emitted when the `mouseenter` event occurs on a section. |
+| `section-mouseleave` | `section`, `event` | Emitted when the `mouseleave` event occurs on a section. |
+| `section-mouseover` | `section`, `event` | Emitted when the `mouseover` event occurs on a section. |
+| `section-mouseout` | `section`, `event` | Emitted when the `mouseout` event occurs on a section. |
+| `section-mousemove` | `section`, `event` | Emitted when the `mousemove` event occurs on a section. |
 
 #### Slots
 
 | Slot | Description |
 | ---- | ----------- |
-| default slot | `section` object | If you want more control over the content of the chart, default slot can be used instead of the `text` prop. |
+| default slot | If you want more control over the content of the chart, default slot can be used instead of the `text` prop. |
 | `legend` | Slot for plugging in your own legend. |
 
 

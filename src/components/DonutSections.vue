@@ -1,15 +1,15 @@
 <template>
 <div class="cdc-sections" :style="containerStyles">
   <div
-    class="cdc-section" v-for="(section, idx) in donutSections"
-    :key="idx" :class="section.className" :style="section.sectionStyles"
-    @click="emitClick(sections[idx])">
+    v-for="(section, idx) in donutSections" v-on="section.listeners" :key="idx"
+    class="cdc-section" :class="section.className" :style="section.sectionStyles">
     <div class="cdc-filler" :style="section.fillerStyles" :title="section.label"></div>
   </div>
 </div>
 </template>
 
 <script>
+import { nativeSectionEvents } from '../utils/events';
 import { defaultColor } from '../utils/misc';
 
 const sectionClass = {
@@ -52,15 +52,27 @@ export default {
         if (degreesConsumed === 180) offsetBy = 0;
         else offsetBy += section.degree;
 
-        return { label: section.label, className, fillerStyles, sectionStyles };
+        const listeners = nativeSectionEvents.reduce((acc, { nativeEventName, sectionEventName }) => ({
+          ...acc,
+          [nativeEventName]: event => this.emitEvent(sectionEventName, section, event)
+        }), {});
+
+        return {
+          label: section.label,
+          className,
+          fillerStyles,
+          sectionStyles,
+          listeners
+        };
       });
 
       return sections;
     }
   },
   methods: {
-    emitClick(section) {
-      this.$emit('section-click', section.$section);
+    emitEvent(sectionEventName, section, event) {
+      if (section.value === 0) return;
+      this.$emit(sectionEventName, section.$section, event);
     }
   }
 };
