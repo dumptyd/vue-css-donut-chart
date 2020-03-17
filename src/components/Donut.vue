@@ -51,6 +51,8 @@ export default {
     // text in the middle of the donut, this can also be passed using the default slot
     text: { type: String, default: null },
 
+    autoAdjustTextSize: { type: Boolean, default: true },
+
     // color to use for the middle of the donut
     // set this to `transparent` or `thickness` to 100 to make a pie chart instead
     background: { type: String, default: '#ffffff' },
@@ -83,6 +85,11 @@ export default {
     startAngle: { type: Number, default: 0 }
   },
   watch: {
+    autoAdjustTextSize(val) {
+      if (val) window.addEventListener('resize', this.resizeListener);
+      else window.removeEventListener('resize', this.resizeListener);
+      this.recalcFontSize();
+    },
     size() {
       this.recalcFontSize();
     },
@@ -203,31 +210,38 @@ export default {
     }
   },
   methods: {
-    recalcFontSize() {
+    async recalcFontSize() {
+      if (!this.autoAdjustTextSize) {
+        this.fontSize = '1em';
+        return;
+      }
+
       const scaleDownBy = 0.08;
       let widthInPx = this.size;
 
-      this.$nextTick(() => {
-        if (this.unit !== 'px') {
-          /* istanbul ignore else */
-          if (this.donutEl) widthInPx = this.donutEl.clientWidth;
-          else widthInPx = null;
-        }
+      await this.$nextTick();
+      if (this.unit !== 'px') {
+        /* istanbul ignore else */
+        if (this.donutEl) widthInPx = this.donutEl.clientWidth;
+        else widthInPx = null;
+      }
 
-        this.fontSize = widthInPx ? `${(widthInPx * scaleDownBy).toFixed(2)}px` : '1em';
-      });
+      this.fontSize = widthInPx ? `${(widthInPx * scaleDownBy).toFixed(2)}px` : '1em';
     },
     emitSectionEvent(sectionEventName, ...args) {
       this.$emit(sectionEventName, ...args);
     }
   },
+  created() {
+    this.resizeListener = this.recalcFontSize.bind(this);
+  },
   mounted() {
     this.donutEl = this.$refs.donut;
-    this.recalcFontSize();
 
-    this.resizeListener = this.recalcFontSize.bind(this);
-
-    window.addEventListener('resize', this.resizeListener);
+    if (this.autoAdjustTextSize) {
+      this.recalcFontSize();
+      window.addEventListener('resize', this.resizeListener);
+    }
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeListener);
