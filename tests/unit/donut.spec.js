@@ -407,10 +407,11 @@ describe('Donut component', () => {
     });
   });
 
-  describe('font-size recalculation for chart content', () => {
+  describe('"auto-adjust-text-size" prop - font-size recalculation for chart content', () => {
     it('triggers font-size recalculation when the component is mounted', () => {
       const recalcFontSize = jest.fn();
-      shallowMount(Donut, { methods: { recalcFontSize } });
+      const wrapper = shallowMount(Donut, { methods: { recalcFontSize } });
+      expect(wrapper.vm.autoAdjustTextSize).toBe(true);
       expect(recalcFontSize).toHaveBeenCalledTimes(1);
     });
 
@@ -453,6 +454,53 @@ describe('Donut component', () => {
       const removeListener = jest.spyOn(window, 'removeEventListener');
       wrapper.destroy();
       expect(removeListener).toHaveBeenCalledWith('resize', expect.any(Function));
+    });
+
+    it('does not perform recalculation or set resize listener when "auto-adjust-text-size" is not set', async () => {
+      const recalcFontSize = jest.fn();
+      const addListener = jest.spyOn(window, 'addEventListener');
+      const wrapper = shallowMount(Donut, {
+        propsData: { autoAdjustTextSize: false },
+        methods: { recalcFontSize }
+      });
+
+      await wrapper.vm.$nextTick();
+      expect(recalcFontSize).not.toHaveBeenCalled();
+      expect(addListener).not.toHaveBeenCalled();
+    });
+
+    it('does not perform recalculation when "auto-adjust-text-size" goes from true to false', async () => {
+      const removeListener = jest.spyOn(window, 'removeEventListener');
+      const wrapper = shallowMount(Donut);
+      jest.spyOn(wrapper.vm.donutEl, 'clientWidth', 'get').mockImplementation(() => 250);
+
+      // by default, font size recalc should cause the default value of 1em to change
+      await wrapper.vm.$nextTick();
+      expect(wrapper.vm.fontSize).not.toBe('1em');
+
+      wrapper.setProps({ autoAdjustTextSize: false });
+
+      // setting it to false should set it back to 1em and remove the resize event listener
+      expect(wrapper.vm.fontSize).toBe('1em');
+      expect(removeListener).toHaveBeenCalledWith('resize', expect.any(Function));
+    });
+
+    it('performs recalculation when "auto-adjust-text-size" goes from false to true', async () => {
+      const addListener = jest.spyOn(window, 'addEventListener');
+      const wrapper = shallowMount(Donut, { propsData: { autoAdjustTextSize: false } });
+      jest.spyOn(wrapper.vm.donutEl, 'clientWidth', 'get').mockImplementation(() => 250);
+
+      // with the prop set to false, even after nextTick, size should remain 1em
+      await wrapper.vm.$nextTick();
+      expect(wrapper.vm.fontSize).toBe('1em');
+
+      wrapper.setProps({ autoAdjustTextSize: true });
+      await wrapper.vm.$nextTick();
+
+      // setting it to true should cause the recalculation to trigger immediately
+      expect(wrapper.vm.fontSize).not.toBe('1em');
+      // and it should register the resize listener
+      expect(addListener).toHaveBeenCalledWith('resize', expect.any(Function));
     });
   });
 });
