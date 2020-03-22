@@ -140,7 +140,7 @@ This will create a donut with 2 sections that take up 25% each.
     :size="200" unit="px" :thickness="30"
     has-legend legend-placement="top"
     :sections="sections" :total="100"
-    :start-angle="0"
+    :start-angle="0" :auto-adjust-text-size="true"
     @section-click="handleSectionClick">
     <h1>75%</h1>
   </vc-donut>
@@ -198,6 +198,7 @@ Making the component look like a pie chart is as simple as setting the `thicknes
 | `total` | Number | No | `100` | Total for calculating the percentage for each section. |
 | `has-legend` | Boolean | No | `false` | Whether the donut should have a legend. |
 | `legend-placement` | String | No | `'bottom'` | Where the legend should be placed. Valid values are `top`, `right`, `bottom` and `left`. Doesn't have an effect if `has-legend` is not true. |
+| `auto-adjust-text-size` | Boolean | No | `true` | Whether the font-size of the donut content is calculated automatically to fit the available space. |
 | `sections` | Array<section> | No | `[]` | An array of objects. Each object in the array represents a section. |
 | `section.value` | Number | **Yes** | &ndash; | Value of the section. The component determines what percent of the donut should be taken by a section based on this value and the `total` prop. Sum of all the sections' `value` should not exceed `total`, an error is thrown otherwise. |
 | `section.color` | String | Read description | Read description | Color of the section. The component comes with 24 predefined colors, so this property is optional if you have <= 24 sections without the `color` property. |

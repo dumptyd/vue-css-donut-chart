@@ -79,6 +79,14 @@
             <textarea name="text" rows="3" v-if="textType === 'HTML'" v-model="donutHTML"></textarea>
           </div>
         </div>
+
+        <div class="control">
+          <label for="auto-adjust-text-size">Auto-adjust font size based on the chart size</label>
+          <input id="auto-adjust-text-size" type="checkbox" v-model="autoAdjustTextSize">
+        </div>
+        <div class="note">
+          Try setting the size to 500px and then check and uncheck this setting to see the difference.
+        </div>
       </div>
       <!-- end donut content -->
 
@@ -188,6 +196,7 @@ export default {
 
       textType: 'HTML',
       donutHTML: `<h1 style="margin: 0;">${initialConsumed}%</h1> donut consumed`,
+      autoAdjustTextSize: true,
 
       unitOptions,
       placementOptions,
@@ -206,7 +215,7 @@ export default {
         size, unit, thickness,
         hasLegend, legendPlacement,
         validatedSections, total,
-        startAngle
+        startAngle, autoAdjustTextSize
       } = this;
       const [computedSize, computedThickness, computedTotal, computedStartAngle] =
         [size, thickness, total, startAngle].map(val => toFixed(val));
@@ -215,6 +224,7 @@ export default {
         size: computedSize > 0 ? computedSize : 200, unit,
         thickness: computedThickness >= 0 && computedThickness <= 100 ? computedThickness : 20,
         hasLegend, legendPlacement,
+        autoAdjustTextSize,
         sections: validatedSections, total: computedTotal > 0 ? computedTotal : 100,
         startAngle: computedStartAngle || 0
       };

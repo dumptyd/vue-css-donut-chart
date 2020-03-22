@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0]
+
+### Added
+- `auto-adjust-text-size` prop is here! The prop can be set to `false` to disable the font size recalculation behavior.
+
+### Other changes
+
+- Demo page now has an option to test `auto-adjust-text-size` prop.
+
 ## [1.2.0]
 
 ### Added
