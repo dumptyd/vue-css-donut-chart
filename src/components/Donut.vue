@@ -210,7 +210,7 @@ export default {
     }
   },
   methods: {
-    async recalcFontSize() {
+    recalcFontSize() {
       if (!this.autoAdjustTextSize) {
         this.fontSize = '1em';
         return;
@@ -219,14 +219,15 @@ export default {
       const scaleDownBy = 0.08;
       let widthInPx = this.size;
 
-      await this.$nextTick();
-      if (this.unit !== 'px') {
-        /* istanbul ignore else */
-        if (this.donutEl) widthInPx = this.donutEl.clientWidth;
-        else widthInPx = null;
-      }
+      this.$nextTick(() => {
+        if (this.unit !== 'px') {
+          /* istanbul ignore else */
+          if (this.donutEl) widthInPx = this.donutEl.clientWidth;
+          else widthInPx = null;
+        }
 
-      this.fontSize = widthInPx ? `${(widthInPx * scaleDownBy).toFixed(2)}px` : '1em';
+        this.fontSize = widthInPx ? `${(widthInPx * scaleDownBy).toFixed(2)}px` : '1em';
+      });
     },
     emitSectionEvent(sectionEventName, ...args) {
       this.$emit(sectionEventName, ...args);
