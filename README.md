@@ -196,6 +196,7 @@ Making the component look like a pie chart is as simple as setting the `thicknes
 | `foreground` | String | No | `'#eeeeee'` | Foreground color of the donut. This is the color that is shown for empty region of the donut ring. |
 | `start-angle` | Number | No | `0` | Angle measure in degrees where the first section should start. |
 | `total` | Number | No | `100` | Total for calculating the percentage for each section. |
+| `half` | Boolean | No | `false` | Whether it displays as a half donut or not. |
 | `has-legend` | Boolean | No | `false` | Whether the donut should have a legend. |
 | `legend-placement` | String | No | `'bottom'` | Where the legend should be placed. Valid values are `top`, `right`, `bottom` and `left`. Doesn't have an effect if `has-legend` is not true. |
 | `auto-adjust-text-size` | Boolean | No | `true` | Whether the font-size of the donut content is calculated automatically to fit the available space. |

@@ -19,6 +19,10 @@
   flex-shrink: 0;
 }
 
+.cdc-sizer {
+  
+}
+
 /* Middle of the donut */
 .cdc-overlay {
   opacity: 1;
