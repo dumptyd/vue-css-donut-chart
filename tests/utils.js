@@ -4,6 +4,7 @@
 export const el = {
   DONUT: '.cdc', // just the donut, without the container
   DONUT_OVERLAY: '.cdc-overlay', // center of the donut
+  DONUT_OVERLAY_SIZER: '.cdc-overlay-sizer', // helps size elements in center of half donut
   DONUT_OVERLAY_CONTENT: '.cdc-text', // this is where the default slot's content goes,
 
   DONUT_SECTIONS_CONTAINER: '.cdc-sections', // container div for all sections

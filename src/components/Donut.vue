@@ -1,14 +1,18 @@
 <template>
 <div class="cdc-container" :style="placementStyles.container">
-  <div class="cdc" ref="donut" :style="donutStyles">
-    <donut-sections
-      v-on="sectionListeners"
-      :sections="donutSections"
-      :start-angle="startAngle">
-    </donut-sections>
-    <div class="cdc-overlay" :style="overlayStyles">
-      <div class="cdc-text" :style="donutTextStyles">
-        <slot>{{ text }}</slot>
+  <div class="cdc-sizer" :style="sizerStyles">
+    <div class="cdc" ref="donut" :style="donutStyles">
+      <donut-sections
+        v-on="sectionListeners"
+        :sections="donutSections"
+        :start-angle="half ? -90 : startAngle">
+      </donut-sections>
+      <div class="cdc-overlay" :style="overlayStyles">
+        <div class="cdc-overlay-sizer" :style="overlaySizerStyles">
+          <div class="cdc-text" :style="donutTextStyles">
+            <slot>{{ text }}</slot>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -82,7 +86,9 @@ export default {
     },
 
     // degree angle at which the first section begins
-    startAngle: { type: Number, default: 0 }
+    startAngle: { type: Number, default: 0 },
+
+    half: { type: Boolean, default: false }
   },
   watch: {
     autoAdjustTextSize(val) {
@@ -115,7 +121,7 @@ export default {
         const err = `Sum of all the sections' values (${valueTotal}) should not exceed \`total\` (${this.total})`;
         throw new Error(err);
       }
-      const degreesInACircle = 360;
+      const degreesInACircle = this.half ? 180 : 360;
       const degreesInASection = 180;
 
       let consumedDegrees = 0;
@@ -181,7 +187,17 @@ export default {
         paddingBottom: size,
         backgroundColor: this.foreground
       };
+      if (this.half) {
+        styles.borderBottomLeftRadius = 0;
+        styles.borderBottomRightRadius = 0;
+      }
       return styles;
+    },
+    sizerStyles() {
+      return this.half ? {
+        height: `${this.size / 2}${this.unit}`,
+        overflow: 'hidden',
+      } : {};
     },
     overlayStyles() {
       const availablePercent = 100;
@@ -190,13 +206,26 @@ export default {
       const sizePercent = `${size}%`;
       const pos = `calc(50% - ${size / 2}%)`;
 
-      return {
+      const styles = {
         height: sizePercent,
         width: sizePercent,
         top: pos,
         left: pos,
-        backgroundColor: this.background
+        backgroundColor: this.background,
       };
+
+      if (this.half) {
+        styles.alignItems = 'flex-start';
+      }
+
+      return styles;
+    },
+    overlaySizerStyles() {
+      return this.half ? {
+        height: '50%',
+        display: 'flex',
+        alignItems: 'center',
+      } : {};
     },
     donutTextStyles() {
       const { fontSize } = this;

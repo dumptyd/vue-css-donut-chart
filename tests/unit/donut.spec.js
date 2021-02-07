@@ -506,4 +506,38 @@ describe('Donut component', () => {
       expect(addListener).toHaveBeenCalledWith('resize', expect.any(Function));
     });
   });
+
+  describe('"half" prop', () => {
+    it('renders the donut without half donut sizing and styling if the half prop is undefined', () => {
+      const wrapper = shallowMount(Donut, { propsData: { half: undefined } });
+      const { style: donutStyles } = wrapper.find(el.DONUT).element;
+      const { style: overlayStyles } = wrapper.find(el.DONUT_OVERLAY).element;
+      const { style: overlaySizerStyles } = wrapper.find(el.DONUT_OVERLAY_SIZER).element;
+
+      expect(donutStyles.borderBottomLeftRadius).toBe('');
+      expect(donutStyles.borderBottomRightRadius).toBe('');
+
+      expect(overlayStyles.alignItems).toBe('');
+
+      expect(overlaySizerStyles.height).toBe('');
+      expect(overlaySizerStyles.display).toBe('');
+      expect(overlaySizerStyles.alignItems).toBe('');
+    });
+
+    it('renders the half donut with proper sizing and styling if the half prop is true', () => {
+      const wrapper = shallowMount(Donut, { propsData: { half: true } });
+      const { style: donutStyles } = wrapper.find(el.DONUT).element;
+      const { style: overlayStyles } = wrapper.find(el.DONUT_OVERLAY).element;
+      const { style: overlaySizerStyles } = wrapper.find(el.DONUT_OVERLAY_SIZER).element;
+
+      expect(donutStyles.borderBottomLeftRadius).toBe('0');
+      expect(donutStyles.borderBottomRightRadius).toBe('0');
+
+      expect(overlayStyles.alignItems).toBe('flex-start');
+
+      expect(overlaySizerStyles.height).toBe('50%');
+      expect(overlaySizerStyles.display).toBe('flex');
+      expect(overlaySizerStyles.alignItems).toBe('center');
+    });
+  });
 });

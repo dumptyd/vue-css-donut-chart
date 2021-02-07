@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0]
+
+### Added
+- `half` prop is here! You can now use this boolean to create a half donut instead of the full donut.
+
+### Other changes
+
+- Demo page now has an option to test `half` prop.
+
 ## [1.3.0]
 
 ### Added

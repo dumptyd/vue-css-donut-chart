@@ -46,6 +46,10 @@
             <label for="start-angle">Start angle (in degrees)</label>
             <input name="start-angle" type="number" class="sm" v-model.number="startAngle">
           </div>
+          <div class="control">
+            <label for="half">Half Donut?</label>
+            <input id="half" type="checkbox" v-model="half">
+          </div>
         </div>
       </div>
       <!-- end donut config -->
@@ -192,6 +196,7 @@ export default {
       total,
 
       hasLegend: true,
+      half: false,
       legendPlacement: 'bottom',
 
       textType: 'HTML',
@@ -212,7 +217,7 @@ export default {
     donutProps() {
       const {
         background, foreground,
-        size, unit, thickness,
+        size, unit, thickness, half,
         hasLegend, legendPlacement,
         validatedSections, total,
         startAngle, autoAdjustTextSize
@@ -223,6 +228,7 @@ export default {
         background, foreground,
         size: computedSize > 0 ? computedSize : 200, unit,
         thickness: computedThickness >= 0 && computedThickness <= 100 ? computedThickness : 20,
+        half: half,
         hasLegend, legendPlacement,
         autoAdjustTextSize,
         sections: validatedSections, total: computedTotal > 0 ? computedTotal : 100,
