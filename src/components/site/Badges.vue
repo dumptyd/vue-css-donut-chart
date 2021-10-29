@@ -40,7 +40,7 @@ const badges = [
   },
   {
     alt: 'Snyk Vulnerabilities for npm package',
-    badgeUrl: 'https://img.shields.io/snyk/vulnerabilities/npm/vue-css-donut-chart@^2',
+    badgeUrl: 'https://img.shields.io/snyk/vulnerabilities/npm/vue-css-donut-chart@2.0.0',
     href: 'https://snyk.io/vuln/npm:vue-css-donut-chart'
   }
 ].map(badge => {

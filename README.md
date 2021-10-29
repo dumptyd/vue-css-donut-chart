@@ -24,7 +24,7 @@
     <img alt="Coverage status" src="https://img.shields.io/codecov/c/gh/dumptyd/vue-css-donut-chart/next?style=flat-square">
   </a>
   <a href="https://snyk.io/vuln/npm:vue-css-donut-chart">
-    <img alt="Snyk Vulnerabilities for npm package" src="https://img.shields.io/snyk/vulnerabilities/npm/vue-css-donut-chart@2?style=flat-square">
+    <img alt="Snyk Vulnerabilities for npm package" src="https://img.shields.io/snyk/vulnerabilities/npm/vue-css-donut-chart@2.0.0?style=flat-square">
   </a>
 </div>
 
@@ -33,13 +33,13 @@
 | Using Vue 2? |
 | :- |
 | Check out the [documentation for vue-css-donut-chart v1](https://github.com/dumptyd/vue-css-donut-chart). |
+| NPM - https://www.npmjs.com/package/vue-css-donut-chart/ |
 
 ## Live demo
 
 Live demo can be found on the project page &ndash; https://dumptyd.github.io/vue-css-donut-chart/next
 
-<!-- TODO: create fiddle for @next -->
-Playground &ndash; TBD
+Playground &ndash; https://jsfiddle.net/dumptyd/f4tmz0oy/
 
 ## Features
 
