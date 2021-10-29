@@ -1,4 +1,5 @@
 import { shallowMount, mount } from '@vue/test-utils';
+import { cloneDeep } from 'lodash';
 import colors from '../../src/utils/colors';
 import { nativeSectionEvents } from '../../src/utils/events';
 import { placementStyles } from '../../src/utils/misc';
@@ -19,7 +20,7 @@ describe('Donut component', () => {
       const size = 200;
       const sizeWithUnit = `${size}px`;
 
-      const wrapper = shallowMount(Donut, { propsData: { size } });
+      const wrapper = shallowMount(Donut, { props: { size } });
       const { style: donutStyles } = wrapper.find(el.DONUT).element;
 
       expect(donutStyles.width).toBe(sizeWithUnit);
@@ -41,7 +42,7 @@ describe('Donut component', () => {
     it('respects the unit provided via unit prop for donut size', () => {
       const [size, unit] = [50, '%'];
 
-      const wrapper = shallowMount(Donut, { propsData: { size, unit } });
+      const wrapper = shallowMount(Donut, { props: { size, unit } });
       const { style: donutStyles } = wrapper.find(el.DONUT).element;
 
       expect(donutStyles.width.endsWith(unit)).toBe(true);
@@ -64,7 +65,7 @@ describe('Donut component', () => {
     it('renders the donut with correct ring thickness based on the thickness prop', () => {
       const thickness = 30;
 
-      const wrapper = shallowMount(Donut, { propsData: { thickness } });
+      const wrapper = shallowMount(Donut, { props: { thickness } });
       const { style: donutStyles } = wrapper.find(el.DONUT_OVERLAY).element;
 
       const expectedDonutOverlaySize = `${100 - thickness}%`;
@@ -77,7 +78,7 @@ describe('Donut component', () => {
     it('renders the text provided via text prop in the center of the donut', () => {
       const text = 'An example text.';
 
-      const wrapper = shallowMount(Donut, { propsData: { text } });
+      const wrapper = shallowMount(Donut, { props: { text } });
       const overlay = wrapper.find(el.DONUT_OVERLAY);
 
       expect(overlay.text()).toBe(text);
@@ -110,7 +111,7 @@ describe('Donut component', () => {
     it('renders the donut with specified background and foreground colors', () => {
       const [foreground, background] = ['#abcdef', '#fedcba'];
 
-      const wrapper = shallowMount(Donut, { propsData: { foreground, background } });
+      const wrapper = shallowMount(Donut, { props: { foreground, background } });
       const donut = wrapper.find(el.DONUT).element;
       const donutOverlay = wrapper.find(el.DONUT_OVERLAY).element;
 
@@ -120,7 +121,7 @@ describe('Donut component', () => {
   });
 
   describe('"sections" prop', () => {
-    it('renders correct number of sections based on the sections prop', () => {
+    it('renders correct number of sections based on the sections prop', async () => {
       let sections = [
         { value: 25 },
         { value: 25 },
@@ -128,7 +129,7 @@ describe('Donut component', () => {
         { value: 25 }
       ];
 
-      const wrapper = mount(Donut, { propsData: { sections } });
+      const wrapper = mount(Donut, { props: { sections } });
 
       let sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
       expect(sectionWrappers).toHaveLength(sections.length);
@@ -138,7 +139,7 @@ describe('Donut component', () => {
         { value: 20 },
         { value: 20 }
       ];
-      wrapper.setProps({ sections });
+      await wrapper.setProps({ sections });
 
       sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
       expect(sectionWrappers).toHaveLength(sections.length);
@@ -147,7 +148,7 @@ describe('Donut component', () => {
         { value: 60 },
         { value: 20 }
       ];
-      wrapper.setProps({ sections });
+      await wrapper.setProps({ sections });
 
       sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
       // since one section takes up more than 180 degrees, it should be split into 2
@@ -161,7 +162,7 @@ describe('Donut component', () => {
       const [fpaValues, fpaSize] = [[33, 33, 33, 1], 201];
       const sections = fpaValues.map(value => ({ value }));
 
-      const wrapper = mount(Donut, { propsData: { sections, size: fpaSize } });
+      const wrapper = mount(Donut, { props: { sections, size: fpaSize } });
       const sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
 
       // it should have 5 sections since the second 33 would get split into two sections
@@ -176,12 +177,12 @@ describe('Donut component', () => {
         { value: 25 }
       ];
 
-      const wrapper = mount(Donut, { propsData: { sections } });
+      const wrapper = mount(Donut, { props: { sections } });
       const sectionFillerWrappers = wrapper.findAll(el.DONUT_SECTION_FILLER);
 
-      expect(sectionFillerWrappers.at(0).element.style.backgroundColor).toBe(hextToCssRgb(colors[0]));
-      expect(sectionFillerWrappers.at(1).element.style.backgroundColor).toBe(hextToCssRgb(sections[1].color));
-      expect(sectionFillerWrappers.at(2).element.style.backgroundColor).toBe(hextToCssRgb(colors[1]));
+      expect(sectionFillerWrappers[0].element.style.backgroundColor).toBe(hextToCssRgb(colors[0]));
+      expect(sectionFillerWrappers[1].element.style.backgroundColor).toBe(hextToCssRgb(sections[1].color));
+      expect(sectionFillerWrappers[2].element.style.backgroundColor).toBe(hextToCssRgb(colors[1]));
     });
 
     it('sets the correct title attribute for each section based on the "label" property', () => {
@@ -191,21 +192,21 @@ describe('Donut component', () => {
         { value: 25 }
       ];
 
-      const wrapper = mount(Donut, { propsData: { sections } });
+      const wrapper = mount(Donut, { props: { sections } });
       const sectionFillerWrappers = wrapper.findAll(el.DONUT_SECTION_FILLER);
 
-      expect(sectionFillerWrappers.at(0).attributes('title')).toBe(sections[0].label);
-      expect(sectionFillerWrappers.at(1).attributes('title')).toBe(sections[1].label);
-      expect(sectionFillerWrappers.at(2).attributes('title')).toBeFalsy(); // no default title
+      expect(sectionFillerWrappers[0].attributes('title')).toBe(sections[0].label);
+      expect(sectionFillerWrappers[1].attributes('title')).toBe(sections[1].label);
+      expect(sectionFillerWrappers[2].attributes('title')).toBeFalsy(); // no default title
     });
 
     it('does not run into error when section.value is not of number type', () => {
-      const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+      const spy = jest.spyOn(global.console, 'warn').mockImplementation(() => {});
       const sections = [{ value: 10 }, { value: '' }];
 
       let error = false;
       try {
-        shallowMount(Donut, { propsData: { sections } });
+        shallowMount(Donut, { props: { sections } });
       }
       catch (err) {
         error = err;
@@ -220,15 +221,15 @@ describe('Donut component', () => {
   });
 
   describe('"total" prop', () => {
-    it('renders the sections differently based on the "total" prop', () => {
+    it('renders the sections differently based on the "total" prop', async () => {
       const sections = [{ value: 90 }];
-      const wrapper = mount(Donut, { propsData: { sections } });
+      const wrapper = mount(Donut, { props: { sections } });
 
       let sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
       // section is split into 2 elements since it's taking more than half the donut area
       expect(sectionWrappers).toHaveLength(sections.length + 1);
 
-      wrapper.setProps({ total: 200 });
+      await wrapper.setProps({ total: 200 });
 
       sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
       // section is not split into 2 elements anymore because it's not taking more than half the total value
@@ -236,13 +237,13 @@ describe('Donut component', () => {
     });
 
     it('throws an error if sum of the section values exceed total', () => {
-      const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+      const spy = jest.spyOn(global.console, 'warn').mockImplementation(() => {});
 
       const [total, sections] = [50, [{ value: 25 }, { value: 26 }]];
 
       let errorThrown = false;
       try {
-        shallowMount(Donut, { propsData: { total, sections } });
+        shallowMount(Donut, { props: { total, sections } });
       }
       catch (error) {
         errorThrown = true;
@@ -261,7 +262,7 @@ describe('Donut component', () => {
 
       let errorThrown = false;
       try {
-        shallowMount(Donut, { propsData: { total, sections } });
+        shallowMount(Donut, { props: { total, sections } });
       }
       catch (error) {
         errorThrown = true;
@@ -279,33 +280,33 @@ describe('Donut component', () => {
         { label: 'Section 2 with value 20', value: 20, color: '#bbbbbb' },
         { label: 'Section 3 with value 30', value: 30, color: '#cccccc' }
       ];
-      const wrapper = shallowMount(Donut, { propsData: { sections, hasLegend: true } });
+      const wrapper = shallowMount(Donut, { props: { sections, hasLegend: true } });
 
       const legendItems = wrapper.findAll(el.LEGEND_ITEM);
       const legendItemColors = wrapper.findAll(el.LEGEND_ITEM_COLOR);
 
       sections.forEach((section, idx) => {
-        expect(legendItems.at(idx).text()).toContain(section.label);
-        expect(legendItemColors.at(idx).element.style.backgroundColor).toContain(hextToCssRgb(section.color));
+        expect(legendItems[idx].text()).toContain(section.label);
+        expect(legendItemColors[idx].element.style.backgroundColor).toContain(hextToCssRgb(section.color));
       });
     });
 
     it('renders the legend with default plugged in colors and text if they\'re not provided', () => {
       const sections = [10, 20, 30].map(value => ({ value }));
-      const wrapper = shallowMount(Donut, { propsData: { sections, hasLegend: true } });
+      const wrapper = shallowMount(Donut, { props: { sections, hasLegend: true } });
 
       const legendItems = wrapper.findAll(el.LEGEND_ITEM);
       const legendItemColors = wrapper.findAll(el.LEGEND_ITEM_COLOR);
 
       sections.forEach((_, idx) => {
-        expect(legendItems.at(idx).text()).toContain(`Section ${idx + 1}`);
-        expect(legendItemColors.at(idx).element.style.backgroundColor).toContain(hextToCssRgb(colors[idx]));
+        expect(legendItems[idx].text()).toContain(`Section ${idx + 1}`);
+        expect(legendItemColors[idx].element.style.backgroundColor).toContain(hextToCssRgb(colors[idx]));
       });
     });
 
     it('doesn\'t render the legend by default', () => {
       const sections = [{ value: 10 }];
-      const wrapper = mount(Donut, { propsData: { sections } });
+      const wrapper = mount(Donut, { props: { sections } });
 
       const legend = wrapper.find(el.LEGEND);
       const legendItems = wrapper.findAll(el.LEGEND_ITEM);
@@ -316,16 +317,18 @@ describe('Donut component', () => {
   });
 
   describe('"legend-placement" prop', () => {
-    it('renders the legend on the correct side based on the "legend-placement" prop', () => {
+    it('renders the legend on the correct side based on the "legend-placement" prop', async () => {
       const sections = [10, 20, 30].map(value => ({ value }));
-      const wrapper = shallowMount(Donut, { propsData: { sections, hasLegend: true } });
+      const wrapper = shallowMount(Donut, { props: { sections, hasLegend: true } });
 
       const directions = ['top', 'right', 'bottom', 'left'];
 
-      directions.forEach(direction => {
-        wrapper.setProps({ legendPlacement: direction });
+      for (let idx = 0; idx < directions.length; ++idx) {
+        const direction = directions[idx];
+        // eslint-disable-next-line no-await-in-loop
+        await wrapper.setProps({ legendPlacement: direction });
         expect(wrapper.vm.placementStyles.legend).toEqual(placementStyles[direction].legend);
-      });
+      }
     });
   });
 
@@ -334,7 +337,7 @@ describe('Donut component', () => {
       const sections = [10, 20, 30].map(value => ({ value }));
       const legendHtml = '<p>Custom legend.</p>';
       const wrapper = shallowMount(Donut, {
-        propsData: { sections, hasLegend: true },
+        props: { sections, hasLegend: true },
         slots: { legend: legendHtml }
       });
 
@@ -348,7 +351,7 @@ describe('Donut component', () => {
       const sections = [10, 20, 30].map(value => ({ value }));
       const startAngle = 45;
 
-      const wrapper = mount(Donut, { propsData: { sections, startAngle } });
+      const wrapper = mount(Donut, { props: { sections, startAngle } });
       const sectionsContainerStyles = wrapper.find(el.DONUT_SECTIONS_CONTAINER).element.style;
 
       expect(sectionsContainerStyles.transform).toBe(`rotate(${startAngle}deg)`);
@@ -356,37 +359,47 @@ describe('Donut component', () => {
   });
 
   describe('section events', () => {
+    const RenderedDonut = sections => ({
+      template: '<vc-donut :sections="sections"></vc-donut>',
+      components: {
+        'vc-donut': Donut
+      },
+      data() {
+        return {
+          sections: cloneDeep(sections)
+        };
+      }
+    });
     nativeSectionEvents.forEach(({ nativeEventName, sectionEventName }) => {
-      it(`emits the "${sectionEventName}" event with correct payload when native "${nativeEventName}" occurs`, () => {
+      // eslint-disable-next-line max-len
+      it(`emits the "${sectionEventName}" event with correct payload when native "${nativeEventName}" occurs`, async () => {
         const sections = [
           { name: 'section-1', value: 10 },
           { name: 'section-2', value: 10 },
           { name: 'section-3', value: 10 }
         ];
-        const sectionsCopy = [
-          { name: 'section-1', value: 10 },
-          { name: 'section-2', value: 10 },
-          { name: 'section-3', value: 10 }
-        ];
+        const sectionsCopy = cloneDeep(sections);
 
-        const wrapper = mount(Donut, { propsData: { sections } });
+        const wrapper = mount(RenderedDonut(sections));
         const sectionWrappers = wrapper.findAll(el.DONUT_SECTION);
+        const donutWrapper = wrapper.findComponent(Donut);
 
-        sections.forEach((section, idx) => {
+        for (let idx = 0; idx < sections.length; ++idx) {
           // trigger the native event on section
-          sectionWrappers.at(idx).trigger(nativeEventName);
-          const sectionEvent = wrapper.emitted(sectionEventName);
+          // eslint-disable-next-line no-await-in-loop
+          await sectionWrappers[idx].trigger(nativeEventName);
+          const sectionEvent = donutWrapper.emitted(sectionEventName);
           const [calledWithSection, nativeEvent] = sectionEvent[idx];
 
           // assert that correct number of events have been emitted
           expect(sectionEvent).toHaveLength(idx + 1);
           // assert that the object passed by the user is the one that's returned back and not the internal one
-          expect(calledWithSection).toBe(section);
+          expect(calledWithSection).toBe(wrapper.vm.sections[idx]);
           // and the object hasn't been mutated
           expect(calledWithSection).toStrictEqual(sectionsCopy[idx]);
           // and the second argument is the native event
           expect(nativeEvent).toBeInstanceOf(Event);
-        });
+        }
       });
     });
 
@@ -396,7 +409,7 @@ describe('Donut component', () => {
     it('does not emit section events when the native events occur on a section with value set to 0', () => {
       const zeroSection = { name: 'section-1', value: 0 };
       const sections = [zeroSection];
-      const wrapper = mount(Donut, { propsData: { sections } });
+      const wrapper = mount(RenderedDonut(sections));
       const sectionWrapper = wrapper.find(el.DONUT_SECTION);
 
       // make sure none of the section-* events are emitted for value:0 sections
@@ -414,31 +427,37 @@ describe('Donut component', () => {
 
     it('triggers font-size recalculation when the component is mounted', () => {
       const recalcFontSize = jest.fn();
-      const wrapper = shallowMount(Donut, { methods: { recalcFontSize } });
+      const localDonut = cloneDeep(Donut);
+      localDonut.methods.recalcFontSize = recalcFontSize;
+      const wrapper = shallowMount(localDonut);
       expect(wrapper.vm.autoAdjustTextSize).toBe(true);
       expect(recalcFontSize).toHaveBeenCalledTimes(1);
     });
 
-    it('triggers font-size recalculation when `size` or `unit` props are updated', () => {
+    it('triggers font-size recalculation when `size` or `unit` props are updated', async () => {
       const recalcFontSize = jest.fn();
-      const wrapper = shallowMount(Donut, { methods: { recalcFontSize } });
+      const localDonut = cloneDeep(Donut);
+      localDonut.methods.recalcFontSize = recalcFontSize;
 
-      wrapper.setProps({ size: 210 });
+      const wrapper = shallowMount(localDonut);
+
+      await wrapper.setProps({ size: 210 });
+      await wrapper.vm.$nextTick();
       expect(recalcFontSize).toHaveBeenCalledTimes(2); // called once on mounted
 
-      wrapper.setProps({ unit: '%' });
+      await wrapper.setProps({ unit: '%' });
       expect(recalcFontSize).toHaveBeenCalledTimes(3);
     });
 
     it('triggers font-size recalculation when the window is resized/zoomed', async () => {
-      const wrapper = shallowMount(Donut, { propsData: { size: 50 } });
+      const wrapper = shallowMount(Donut, { props: { size: 50 } });
       const { vm } = wrapper;
 
       let clientWidth = 250;
       jest.spyOn(vm.donutEl, 'clientWidth', 'get').mockImplementation(() => clientWidth);
 
       // trigger recalcFontSize so it accesses `clientWidth` this time
-      wrapper.setProps({ unit: '%' });
+      await wrapper.setProps({ unit: '%' });
       await vm.$nextTick();
 
       const oldfontSize = wrapper.vm.fontSize;
@@ -456,16 +475,17 @@ describe('Donut component', () => {
     it('removes the resize listener from window when the component is destroyed', () => {
       const wrapper = shallowMount(Donut);
       const removeListener = jest.spyOn(window, 'removeEventListener');
-      wrapper.destroy();
+      wrapper.unmount();
       expect(removeListener).toHaveBeenCalledWith('resize', expect.any(Function));
     });
 
     it('does not perform recalculation or set resize listener when "auto-adjust-text-size" is not set', async () => {
       const recalcFontSize = jest.fn();
+      const localDonut = cloneDeep(Donut);
+      localDonut.methods.recalcFontSize = recalcFontSize;
       const addListener = jest.spyOn(window, 'addEventListener');
-      const wrapper = shallowMount(Donut, {
-        propsData: { autoAdjustTextSize: false },
-        methods: { recalcFontSize }
+      const wrapper = shallowMount(localDonut, {
+        props: { autoAdjustTextSize: false }
       });
 
       await wrapper.vm.$nextTick();
@@ -481,7 +501,8 @@ describe('Donut component', () => {
       await wrapper.vm.$nextTick();
       expect(wrapper.vm.fontSize).not.toBe('1em');
 
-      wrapper.setProps({ autoAdjustTextSize: false });
+      await wrapper.setProps({ autoAdjustTextSize: false });
+      await wrapper.vm.$nextTick();
 
       // setting it to false should set it back to 1em and remove the resize event listener
       expect(wrapper.vm.fontSize).toBe('1em');
@@ -490,14 +511,14 @@ describe('Donut component', () => {
 
     it('performs recalculation when "auto-adjust-text-size" goes from false to true', async () => {
       const addListener = jest.spyOn(window, 'addEventListener');
-      const wrapper = shallowMount(Donut, { propsData: { autoAdjustTextSize: false } });
+      const wrapper = shallowMount(Donut, { props: { autoAdjustTextSize: false } });
 
       // with the prop set to false, even after nextTick, size should remain 1em
       await wrapper.vm.$nextTick();
       expect(wrapper.vm.fontSize).toBe('1em');
       expect(addListener).not.toHaveBeenCalled();
 
-      wrapper.setProps({ autoAdjustTextSize: true });
+      await wrapper.setProps({ autoAdjustTextSize: true });
       await wrapper.vm.$nextTick();
 
       // setting it to true should cause the recalculation to trigger immediately
