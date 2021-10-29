@@ -3,19 +3,19 @@ name: github-pages
 on:
   push:
     branches:
-      - master
+      - next
 
 jobs:
   build-deploy:
     name: Build and deploy the demo site to GitHub Pages
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@master
 
-      - name: Use Node.js 8.15.0
-        uses: actions/setup-node@v1
+      - name: Use Node.js 12
+        uses: actions/setup-node@v2
         with:
-          node-version: 8.15.0
+          node-version: '12'
 
       - run: yarn install
 
@@ -23,11 +23,10 @@ jobs:
         run: yarn build
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v2.4.0
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          emptyCommits: false
-          keepFiles: true
-        env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./docs
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          keep_files: true
+          publish_branch: gh-pages
+          publish_dir: ./docs
+          destination_dir: next
