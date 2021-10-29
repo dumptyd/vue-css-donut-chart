@@ -33,7 +33,7 @@
 | Using Vue 2? |
 | :- |
 | Check out the [documentation for vue-css-donut-chart v1](https://github.com/dumptyd/vue-css-donut-chart). |
-| NPM - https://www.npmjs.com/package/vue-css-donut-chart/ |
+| **NPM** - https://www.npmjs.com/package/vue-css-donut-chart/ |
 
 ## Live demo
 
