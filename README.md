@@ -47,9 +47,9 @@ Playground &ndash; https://jsfiddle.net/dumptyd/f4tmz0oy/
 
 :black_medium_small_square: Vue 2 and Vue 3 support.
 
-:black_medium_small_square: Small size footprint. [![npm bundle size](https://img.shields.io/bundlephobia/minzip/vue-css-donut-chart?style=flat-square)](https://bundlephobia.com/result?p=vue-css-donut-chart)
+:black_medium_small_square: Small size footprint. [![npm bundle size](https://img.shields.io/bundlephobia/minzip/vue-css-donut-chart@next?style=flat-square)](https://bundlephobia.com/result?p=vue-css-donut-chart@next)
 
-:black_medium_small_square: High test coverage. [![Coverage status](https://img.shields.io/codecov/c/gh/dumptyd/vue-css-donut-chart?style=flat-square)](https://codecov.io/gh/dumptyd/vue-css-donut-chart)
+:black_medium_small_square: High test coverage. [![Coverage status](https://img.shields.io/codecov/c/gh/dumptyd/vue-css-donut-chart/next?style=flat-square)](https://codecov.io/gh/dumptyd/vue-css-donut-chart/branch/next)
 
 :black_medium_small_square: Performs automatic font size recalculation as the size of the donut changes.
 
