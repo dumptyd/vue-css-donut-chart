@@ -6,6 +6,6 @@ if (process.env.MODE === 'site') {
 
 module.exports = {
   presets: [
-    ['@vue/app', { useBuiltIns }]
+    ['@vue/cli-plugin-babel/preset', { useBuiltIns }]
   ]
 };
