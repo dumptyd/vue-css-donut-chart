@@ -11,7 +11,7 @@
     <a href="https://github.com/dumptyd/vue-css-donut-chart">GitHub</a>
   </nav>
   <div class="container-donut">
-    <donut v-on="listeners" v-bind="donutProps">
+    <donut v-bind="donutProps" v-on="listeners">
       <div v-html="donutHTML"></div>
     </donut>
   </div>

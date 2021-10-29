@@ -22,6 +22,7 @@ export default {
     startAngle: { type: Number, default: 0 },
     sections: { type: Array, default: () => [] }
   },
+  emits: nativeSectionEvents.map(evt => evt.sectionEventName),
   computed: {
     containerStyles() {
       return {

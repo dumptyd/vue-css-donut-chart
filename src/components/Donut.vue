@@ -84,6 +84,7 @@ export default {
     // degree angle at which the first section begins
     startAngle: { type: Number, default: 0 }
   },
+  emits: nativeSectionEvents.map(evt => evt.sectionEventName),
   watch: {
     autoAdjustTextSize(val) {
       if (val) window.addEventListener('resize', this.resizeListener);
@@ -244,7 +245,7 @@ export default {
       window.addEventListener('resize', this.resizeListener);
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.resizeListener);
   },
   components: { DonutSections }

@@ -1,8 +1,6 @@
-import Vue from 'vue';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { createApp } from 'vue';
 import App from './App.vue';
 
-Vue.config.productionTip = false;
-
-new Vue({
-  render: h => h(App)
-}).$mount('#app');
+const app = createApp(App);
+app.mount('#app');
