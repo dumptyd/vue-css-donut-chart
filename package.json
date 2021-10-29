@@ -3,7 +3,6 @@
   "version": "1.3.0",
   "description": "Lightweight Vue component for drawing pure CSS donut charts",
   "author": "dumptyd <dumptyd2.0@gmail.com>",
-  "homepage": "https://dumptyd.github.io/vue-css-donut-chart/",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "yarn clear:babel-cache && MODE=site vue-cli-service build --modern --dest docs",
@@ -16,21 +15,28 @@
   "main": "dist/vcdonut.umd.js",
   "module": "dist/vcdonut.common.js",
   "unpkg": "dist/vcdonut.umd.min.js",
-  "dependencies": {
-    "vue": "^2.6.11"
+  "peerDependencies": {
+    "vue": "^3"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.3",
-    "@vue/cli-plugin-eslint": "^3.0.3",
-    "@vue/cli-plugin-unit-jest": "^3.11.0",
-    "@vue/cli-service": "^3.0.3",
-    "@vue/test-utils": "1.0.0-beta.29",
-    "babel-core": "7.0.0-bridge.0",
+    "@vue/cli-plugin-babel": "~4.5.14",
+    "@vue/cli-plugin-eslint": "~4.5.14",
+    "@vue/cli-plugin-unit-jest": "~4.5.14",
+    "@vue/cli-service": "~4.5.14",
+    "@vue/compiler-sfc": "^3.2.20",
+    "@vue/test-utils": "^2.0.0-rc.16",
+    "babel-eslint": "^10.1.0",
     "babel-jest": "^23.6.0",
-    "dev": "^0.1.3",
+    "core-js": "^3.6.5",
+    "eslint": "^6.7.2",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "vue-template-compiler": "^2.6.11"
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "lodash": "^4.17.21",
+    "vue": "^3.2.20"
+  },
+  "resolutions": {
+    "vue-jest": "^5.0.0-alpha.10"
   },
   "postcss": {
     "plugins": {
@@ -43,13 +49,16 @@
     "not ie <= 8"
   ],
   "bugs": "https://github.com/dumptyd/vue-css-donut-chart/issues",
+  "homepage": "https://dumptyd.github.io/vue-css-donut-chart/",
   "keywords": [
     "donut",
     "pie",
     "chart",
     "circle",
+    "radial",
     "progress",
     "vue",
+    "vue 3",
     "css",
     "pure CSS"
   ],
