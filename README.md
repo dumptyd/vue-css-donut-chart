@@ -87,11 +87,12 @@ npm install vue-css-donut-chart@next
 :black_medium_small_square: **ES6**
 
 ```javascript
+import { createApp } from 'vue';
 import Donut from 'vue-css-donut-chart';
 import 'vue-css-donut-chart/dist/vcdonut.css';
 
-Vue.use(Donut);
-
+const app = createApp({});
+app.use(Donut);
 ```
 
 #### :black_medium_small_square: In-browser using CDNs
@@ -102,7 +103,8 @@ Vue.use(Donut);
 <link rel="stylesheet" href="https://unpkg.com/vue-css-donut-chart@2/dist/vcdonut.css">
 <script src="https://unpkg.com/vue-css-donut-chart@2"></script>
 <script>
-  Vue.use(vcdonut.default);
+  const app = Vue.createApp({});
+  app.use(vcdonut.default);
 </script>
 ```
 
@@ -112,7 +114,8 @@ Vue.use(Donut);
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-css-donut-chart@2/dist/vcdonut.css">
 <script src="https://cdn.jsdelivr.net/npm/vue-css-donut-chart@2/dist/vcdonut.umd.min.js"></script>
 <script>
-  Vue.use(vcdonut.default);
+  const app = Vue.createApp({});
+  app.use(vcdonut.default);
 </script>
 ```
 
