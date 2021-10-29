@@ -28,6 +28,10 @@
   </a>
 </div>
 
+<hr>
+
+>Using Vue 3? Check out the [documentation for vue-css-donut-chart v2](https://github.com/dumptyd/vue-css-donut-chart/tree/next).
+
 ## Live demo
 
 Live demo can be found on the project page &ndash; https://dumptyd.github.io/vue-css-donut-chart
@@ -37,6 +41,8 @@ Playground &ndash; https://jsfiddle.net/dumptyd/ujvypcd3/
 ## Features
 
 :black_medium_small_square: No external dependencies.
+
+:black_medium_small_square: Vue 2 and Vue 3 support.
 
 :black_medium_small_square: Small size footprint. [![npm bundle size](https://img.shields.io/bundlephobia/minzip/vue-css-donut-chart?style=flat-square)](https://bundlephobia.com/result?p=vue-css-donut-chart)
 
@@ -232,4 +238,4 @@ All the `section-*` listeners are called with the `section` object on which the 
 
 ## License
 
-Code released under [MIT]((https://github.com/vue-css-donut-chart/vue-css-donut-chart/blob/master/LICENSE)) license.
+Code released under [MIT](https://github.com/vue-css-donut-chart/vue-css-donut-chart/blob/master/LICENSE) license.
