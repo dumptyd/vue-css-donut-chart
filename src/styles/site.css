@@ -158,3 +158,13 @@ button.outline-red:hover {
     max-height: 300px;
   }
 }
+
+
+.vue-version-select {
+  font-weight: bold;
+  color: #42b883;
+  font-size: .85em;
+  padding: .1em .2em;
+  margin: 0 .2em;
+  border-width: 1px;
+}

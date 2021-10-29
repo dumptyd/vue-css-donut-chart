@@ -2,8 +2,16 @@
 <div class="container">
   <div class="container-header">
     <h1>vue-css-donut-chart <sup>{{ version }}</sup></h1>
-    <span>Lightweight Vue component for drawing pure CSS donut charts</span>
+    <div>
+      Lightweight
+      <select class="vue-version-select" @change="handleVersionSelectChange">
+        <option value="/vue-css-donut-chart" selected>Vue 2</option>
+        <option value="/vue-css-donut-chart/next">Vue 3</option>
+      </select>
+      component for drawing pure CSS donut charts
+    </div>
   </div>
+
   <nav class="container-nav">
     <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md">Documentation</a>
     <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md#installation">Installation</a>
@@ -11,7 +19,7 @@
     <a href="https://github.com/dumptyd/vue-css-donut-chart">GitHub</a>
   </nav>
   <div class="container-donut">
-    <donut v-on="listeners" v-bind="donutProps">
+    <donut v-bind="donutProps" v-on="listeners">
       <div v-html="donutHTML"></div>
     </donut>
   </div>
@@ -270,6 +278,9 @@ export default {
       ];
       // eslint-disable-next-line no-console
       info.forEach(args => console.log(...args));
+    },
+    handleVersionSelectChange(evt) {
+      window.location.href = evt.target.value;
     }
   },
   components: { Donut }
