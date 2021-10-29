@@ -5,38 +5,45 @@
     </a>
   </p>
   <h2 align="center">vue-css-donut-chart</h2>
-  <p align="center">Lightweight Vue component for drawing pure CSS donut charts</p>
+  <p align="center">Lightweight Vue 3 component for drawing pure CSS donut charts</p>
 
   <!-- badges -->
-  <a href="https://www.npmjs.com/package/vue-css-donut-chart">
-    <img alt="npm" src="https://img.shields.io/npm/v/vue-css-donut-chart?style=flat-square">
+  <a href="https://www.npmjs.com/package/vue-css-donut-chart/v/next">
+    <img alt="npm" src="https://img.shields.io/npm/v/vue-css-donut-chart/next?style=flat-square">
   </a>
-  <a href="https://www.npmjs.com/package/vue-css-donut-chart">
+  <a href="https://www.npmjs.com/package/vue-css-donut-chart/v/next">
     <img alt="npm monthly downloads" src="https://img.shields.io/npm/dm/vue-css-donut-chart?style=flat-square">
   </a>
-  <a href="https://bundlephobia.com/result?p=vue-css-donut-chart">
-    <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/minzip/vue-css-donut-chart?style=flat-square">
+  <a href="https://bundlephobia.com/result?p=vue-css-donut-chart@next">
+    <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/minzip/vue-css-donut-chart@next?style=flat-square">
   </a>
-  <a href="https://actions-badge.atrox.dev/dumptyd/vue-css-donut-chart/goto">
-    <img alt="GitHub Actions status" src="https://img.shields.io/endpoint.svg?url=https://actions-badge.atrox.dev/dumptyd/vue-css-donut-chart/badge&label=tests&style=flat-square&logo=none">
+  <a href="https://actions-badge.atrox.dev/dumptyd/vue-css-donut-chart/goto?ref=next">
+    <img alt="GitHub Actions status" src="https://img.shields.io/endpoint.svg?url=https://actions-badge.atrox.dev/dumptyd/vue-css-donut-chart/badge&label=tests&style=flat-square&logo=none&ref=next">
   </a>
-  <a href="https://codecov.io/gh/dumptyd/vue-css-donut-chart">
-    <img alt="Coverage status" src="https://img.shields.io/codecov/c/gh/dumptyd/vue-css-donut-chart?style=flat-square">
+  <a href="https://codecov.io/gh/dumptyd/vue-css-donut-chart/branch/next">
+    <img alt="Coverage status" src="https://img.shields.io/codecov/c/gh/dumptyd/vue-css-donut-chart/next?style=flat-square">
   </a>
   <a href="https://snyk.io/vuln/npm:vue-css-donut-chart">
-    <img alt="Snyk Vulnerabilities for npm package" src="https://img.shields.io/snyk/vulnerabilities/npm/vue-css-donut-chart?style=flat-square">
+    <img alt="Snyk Vulnerabilities for npm package" src="https://img.shields.io/snyk/vulnerabilities/npm/vue-css-donut-chart@2?style=flat-square">
   </a>
 </div>
 
+<hr>
+
+>Using Vue 2? Check out the [documentation for vue-css-donut-chart v1](https://github.com/dumptyd/vue-css-donut-chart).
+
 ## Live demo
 
-Live demo can be found on the project page &ndash; https://dumptyd.github.io/vue-css-donut-chart
+Live demo can be found on the project page &ndash; https://dumptyd.github.io/vue-css-donut-chart/next
 
-Playground &ndash; https://jsfiddle.net/dumptyd/ujvypcd3/
+<!-- TODO: create fiddle for @next -->
+Playground &ndash; TBD
 
 ## Features
 
 :black_medium_small_square: No external dependencies.
+
+:black_medium_small_square: Vue 2 and Vue 3 support.
 
 :black_medium_small_square: Small size footprint. [![npm bundle size](https://img.shields.io/bundlephobia/minzip/vue-css-donut-chart?style=flat-square)](https://bundlephobia.com/result?p=vue-css-donut-chart)
 
@@ -65,14 +72,14 @@ Playground &ndash; https://jsfiddle.net/dumptyd/ujvypcd3/
 #### Install via `yarn` or `npm`
 
 ```console
-yarn add vue-css-donut-chart
+yarn add vue-css-donut-chart@next
 ```
 
 <p align="center"><strong><small>OR</small></strong></p>
 
 
 ```console
-npm install vue-css-donut-chart
+npm install vue-css-donut-chart@next
 ```
 
 #### Registering `vue-css-donut-chart`
@@ -92,8 +99,8 @@ Vue.use(Donut);
 ##### Using [unpkg](https://unpkg.com)
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/vue-css-donut-chart@1/dist/vcdonut.css">
-<script src="https://unpkg.com/vue-css-donut-chart@1"></script>
+<link rel="stylesheet" href="https://unpkg.com/vue-css-donut-chart@2/dist/vcdonut.css">
+<script src="https://unpkg.com/vue-css-donut-chart@2"></script>
 <script>
   Vue.use(vcdonut.default);
 </script>
@@ -102,8 +109,8 @@ Vue.use(Donut);
 ##### Using [jsDelivr](https://www.jsdelivr.com)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-css-donut-chart@1/dist/vcdonut.css">
-<script src="https://cdn.jsdelivr.net/npm/vue-css-donut-chart@1/dist/vcdonut.umd.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-css-donut-chart@2/dist/vcdonut.css">
+<script src="https://cdn.jsdelivr.net/npm/vue-css-donut-chart@2/dist/vcdonut.umd.min.js"></script>
 <script>
   Vue.use(vcdonut.default);
 </script>
@@ -232,4 +239,4 @@ All the `section-*` listeners are called with the `section` object on which the 
 
 ## License
 
-Code released under [MIT]((https://github.com/vue-css-donut-chart/vue-css-donut-chart/blob/master/LICENSE)) license.
+Code released under [MIT](https://github.com/vue-css-donut-chart/vue-css-donut-chart/blob/master/LICENSE) license.
