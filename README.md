@@ -30,7 +30,9 @@
 
 <hr>
 
->Using Vue 2? Check out the [documentation for vue-css-donut-chart v1](https://github.com/dumptyd/vue-css-donut-chart).
+| Using Vue 2? |
+| :- |
+| Check out the [documentation for vue-css-donut-chart v1](https://github.com/dumptyd/vue-css-donut-chart). |
 
 ## Live demo
 
