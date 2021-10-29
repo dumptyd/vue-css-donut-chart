@@ -4,11 +4,12 @@
     <h1>vue-css-donut-chart <sup>{{ version }}</sup></h1>
     <span>Lightweight Vue component for drawing pure CSS donut charts</span>
   </div>
+
   <nav class="container-nav">
-    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md">Documentation</a>
-    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md#installation">Installation</a>
-    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md#usage">Usage</a>
-    <a href="https://github.com/dumptyd/vue-css-donut-chart">GitHub</a>
+    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/next/README.md">Documentation</a>
+    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/next/README.md#installation">Installation</a>
+    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/next/README.md#usage">Usage</a>
+    <a href="https://github.com/dumptyd/vue-css-donut-chart/tree/next">GitHub</a>
   </nav>
   <div class="container-donut">
     <donut v-bind="donutProps" v-on="listeners">
