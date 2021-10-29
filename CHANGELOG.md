@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.3.0]
+## 1.3.1
+
+- Vue is now listed as a peer dependency rather than a direct one.
+
+## 1.3.0
 
 ### Added
 - `auto-adjust-text-size` prop is here! The prop can be set to `false` to disable the font size recalculation behavior.
@@ -11,7 +15,7 @@ All notable changes to this project will be documented in this file.
 
 - Demo page now has an option to test `auto-adjust-text-size` prop.
 
-## [1.2.0]
+## 1.2.0
 
 ### Added
 
@@ -33,12 +37,12 @@ All notable changes to this project will be documented in this file.
 - Demo page now has a section dedicated for testing all the exposed events.
 - Documentation has been updated with new events.
 
-## [1.1.6]
-## [1.1.5]
+## 1.1.6
+## 1.1.5
 
 - Minor alignment change in documentation so it doesn't look awkward on npm. npm has a bug where it doesn't center align some things.
 
-## [1.1.4]
+## 1.1.4
 
 ### Fixed
 
@@ -51,7 +55,7 @@ All notable changes to this project will be documented in this file.
 - Minor refactoring.
 - Readme has been revamped with better formatting.
 
-## [1.1.3]
+## 1.1.3
 
 ### Fixed
 
@@ -59,7 +63,7 @@ All notable changes to this project will be documented in this file.
 - Font size is now recalculated only when the chart has rendered.
 
 
-## [1.1.2]
+## 1.1.2
 
 ### Added
 
@@ -69,6 +73,6 @@ All notable changes to this project will be documented in this file.
 - Donut component specific `resize` event handler is now removed when the component is destroyed (as it should).
 
 
-## [All versions before 1.1.2]
+## All versions before 1.1.2
 
 - The changelog didn't exist.

@@ -30,7 +30,10 @@
 
 <hr>
 
->Using Vue 3? Check out the [documentation for vue-css-donut-chart v2](https://github.com/dumptyd/vue-css-donut-chart/tree/next).
+| Using Vue 3? |
+| :- |
+| Check out the [documentation for vue-css-donut-chart v2](https://github.com/dumptyd/vue-css-donut-chart/tree/next). |
+| **NPM** - https://www.npmjs.com/package/vue-css-donut-chart/v/next |
 
 ## Live demo
 
