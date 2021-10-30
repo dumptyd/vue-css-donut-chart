@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.2
+
+- Upgrading to Vue 2.6.14 broke the package when using it with Vue versions lower than 2.6.13. This version reverts that change and goes back to using 2.6.11.
+
 ## 1.3.1
 
 - Vue is now listed as a peer dependency rather than a direct one.
