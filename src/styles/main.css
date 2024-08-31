@@ -87,12 +87,18 @@
 }
 
 /* For sections that draw from 0 to 180 degrees */
-.cdc-section.cdc-section-right { left: 50%; }
-.cdc-section.cdc-section-right .cdc-filler { transform-origin: 0% 50%; }
+.cdc-section.cdc-section-right {
+  left: 50%;
+}
+.cdc-section.cdc-section-right .cdc-filler {
+  transform-origin: 0% 50%;
+}
 
 /* and 180 to 360 degrees */
 .cdc-section.cdc-section-left {
   left: 0%;
   transform-origin: 100% 50%;
 }
-.cdc-section.cdc-section-left .cdc-filler { transform-origin: 100% 50%; }
+.cdc-section.cdc-section-left .cdc-filler {
+  transform-origin: 100% 50%;
+}

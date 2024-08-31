@@ -3,23 +3,24 @@ on: [push, pull_request]
 jobs:
   lint_test_upload-coverage:
     name: Lint, test and upload coverage
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Use Node.js 12
-        uses: actions/setup-node@v2
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
         with:
-          node-version: '12'
+          node-version: 20
+          cache: 'npm'
 
-      - run: yarn install
+      - run: npm install
 
-      - name: Check for lint errors
-        run: yarn lint --no-fix
+      - name: Check for linting errors
+        run: npm run lint
 
       - name: Run tests
         if: success()
-        run: yarn test:coverage
+        run: yarn test
 
       - name: Upload coverage
         if: success()

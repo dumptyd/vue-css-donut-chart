@@ -1,23 +1,16 @@
 <template>
   <div id="app">
-    <demo></demo>
+    <donut-demo></donut-demo>
 
     <footer>
-      <div class="credit">
-        Made with <strong>👐</strong> and <strong>⌨️</strong> by
-        <a href="https://github.com/dumptyd">dumptyd</a>.
-      </div>
+      <div class="credit">Created by <a href="https://dumptyd.github.io/">dumptyd</a>.</div>
 
-      <badges></badges>
+      <project-badges></project-badges>
     </footer>
   </div>
 </template>
 
-<script>
-import Demo from './components/site/Demo.vue';
-import Badges from './components/site/Badges.vue';
-
-export default {
-  components: { Demo, Badges }
-};
+<script setup lang="ts">
+import DonutDemo from '@/components/site/ProjectDemo.vue';
+import ProjectBadges from '@/components/site/ProductBadges.vue';
 </script>

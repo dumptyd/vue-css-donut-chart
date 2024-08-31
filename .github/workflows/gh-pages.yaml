@@ -3,30 +3,30 @@ name: github-pages
 on:
   push:
     branches:
-      - next
+      - master
 
 jobs:
   build-deploy:
     name: Build and deploy the demo site to GitHub Pages
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
 
-      - name: Use Node.js 12
-        uses: actions/setup-node@v2
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
         with:
-          node-version: '12'
+          node-version: 20
+          cache: 'npm'
 
-      - run: yarn install
+      - run: npm install
 
       - name: Build
-        run: yarn build
+        run: npm run build:site
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           keep_files: true
           publish_branch: gh-pages
-          publish_dir: ./docs
-          destination_dir: next
+          publish_dir: ./dist

@@ -6,15 +6,19 @@ body {
   font-size: 18px;
 }
 
-a { color: #333; }
-a:hover { color: #000; }
+a {
+  color: #333;
+}
+a:hover {
+  color: #000;
+}
 
 .container {
   margin: 3rem auto;
   max-width: 992px;
   box-shadow: 0 0 10px 0px #ddd;
   background-color: #fff;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
 
 .container-header {
@@ -22,24 +26,24 @@ a:hover { color: #000; }
   color: #fff;
   text-align: center;
   font-size: 1.5rem;
-  padding: 1.5rem .5rem;
+  padding: 1.5rem 0.5rem;
   border-bottom: 1px solid #ddd;
 }
 
 .container-header h1 {
-  margin: 0 0 .5rem 0;
+  margin: 0 0 0.5rem 0;
 }
 
 .container-nav {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 1rem .5rem;
+  padding: 1rem 0.5rem;
   border-bottom: 1px solid #ddd;
 }
 .container-nav > a {
   text-decoration: none;
-  margin: .5rem 1rem;
+  margin: 0.5rem 1rem;
 }
 
 .container-donut {
@@ -50,7 +54,9 @@ a:hover { color: #000; }
   border-bottom: 1px solid #ddd;
 }
 
-.container-body { padding: 0 1.5rem 3rem; }
+.container-body {
+  padding: 0 1.5rem 3rem;
+}
 
 .control-group {
   display: flex;
@@ -59,14 +65,31 @@ a:hover { color: #000; }
 .control {
   display: inline-flex;
   align-items: center;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 .control-vertical {
   flex-direction: column;
   align-items: start;
 }
-.control:not(:last-child) { margin-right: 1.5rem; }
-.control-vertical label { margin-bottom: 1rem; }
+.control:not(:last-child) {
+  margin-right: 1.5rem;
+}
+.control-vertical label {
+  margin-bottom: 1rem;
+}
+.control.checkbox {
+  cursor: pointer;
+}
+.control.checkbox label {
+  line-height: 1;
+  cursor: pointer;
+}
+.control.checkbox input[type='checkbox']+label {
+  margin-left: 0.5rem;
+}
+.control.checkbox input[type='checkbox'] {
+  margin-top: 0.2rem;
+}
 
 footer {
   text-align: center;
@@ -74,7 +97,7 @@ footer {
 }
 
 .credit {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .badges {
@@ -85,41 +108,55 @@ footer {
 }
 
 .badge {
-  margin: .5rem .5rem 0;
+  margin: 0.5rem 0.5rem 0;
 }
 
 .note {
-  margin-top: .5rem;
-  padding: .5rem .75rem;
-  font-size: .9rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
   border-left: 5px solid deepskyblue;
 }
 
-label { margin-right: .75rem; }
-input, select, textarea, button {
+label {
+  margin-right: 0.75rem;
+}
+input,
+select,
+textarea,
+button {
   background-color: inherit;
   border: 2px solid #d8d8d8;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 5px;
   display: inline-block;
 }
-input:invalid, select:invalid, textarea:invalid {
+input:invalid,
+select:invalid,
+textarea:invalid {
   box-shadow: 0 0 10px 2px tomato;
   z-index: 1;
 }
-input[type=color] {
+input[type='color'] {
   height: 2.5rem;
   padding: 0;
   border: none;
 }
-input.sm, select.sm { max-width: 5rem; }
+input[type='checkbox'] {
+  cursor: pointer;
+}
+
+input.sm,
+select.sm {
+  max-width: 5rem;
+}
 
 button {
   display: inline-flex;
   align-items: center;
-  padding: .75rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   cursor: pointer;
-  transition: .1s all ease-in;
+  transition: 0.1s all ease-in;
 }
 button.outline-green {
   border-color: #33995f;
@@ -138,18 +175,34 @@ button.outline-red:hover {
   color: #fff;
 }
 
-.flex-grow-1 { flex-grow: 1; }
-.flex-start { align-items: stretch; }
-.flex-column { flex-direction: column; }
-.w-100 { width: 100%; }
-.big { font-size: 1.5em; }
+.flex-grow-1 {
+  flex-grow: 1;
+}
+.flex-start {
+  align-items: stretch;
+}
+.flex-column {
+  flex-direction: column;
+}
+.w-100 {
+  width: 100%;
+}
+.big {
+  font-size: 1.5em;
+}
 
 @media (max-width: 768px) {
-  .container { margin: 0 auto; }
-  .container-header { font-size: 1.125rem; }
+  .container {
+    margin: 0 auto;
+  }
+  .container-header {
+    font-size: 1.125rem;
+  }
 }
 @media (max-width: 850px) {
-  .donut-sections .control-group { flex-direction: column; }
+  .donut-sections .control-group {
+    flex-direction: column;
+  }
 }
 @media (min-width: 768px) and (min-height: 500px) {
   .container-donut {
@@ -159,12 +212,11 @@ button.outline-red:hover {
   }
 }
 
-
 .vue-version-select {
   font-weight: bold;
   color: #42b883;
-  font-size: .85em;
-  padding: .1em .2em;
-  margin: 0 .2em;
+  font-size: 0.85em;
+  padding: 0.1em 0.2em;
+  margin: 0 0.2em;
   border-width: 1px;
 }
