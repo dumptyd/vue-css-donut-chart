@@ -30,14 +30,19 @@
 
 <hr>
 
+<!-- tell users this is for vue 2 and its not maintained but stable -->
+>[!IMPORTANT]
+> This is the documentation for the legacy version of `vue-css-donut-chart` which supports Vue 2 and is no longer maintained. However, it is stable and can be used in existing projects. If you are starting a new project or using Vue 3, consider using the latest version of the package which is written in TypeScript and supports Vue 3.
+
+
 | Using Vue 3? |
 | :- |
-| Check out the [documentation for vue-css-donut-chart v2](https://github.com/dumptyd/vue-css-donut-chart/tree/next). |
-| **NPM** - https://www.npmjs.com/package/vue-css-donut-chart/v/next |
+| Check out the [documentation for vue-css-donut-chart v2](https://github.com/dumptyd/vue-css-donut-chart). |
+| **NPM** - https://www.npmjs.com/package/vue-css-donut-chart/ |
 
 ## Live demo
 
-Live demo can be found on the project page &ndash; https://dumptyd.github.io/vue-css-donut-chart
+Live demo can be found on the project page &ndash; https://dumptyd.github.io/vue-css-donut-chart/legacy/
 
 Playground &ndash; https://jsfiddle.net/dumptyd/ujvypcd3/
 
@@ -74,14 +79,14 @@ Playground &ndash; https://jsfiddle.net/dumptyd/ujvypcd3/
 #### Install via `yarn` or `npm`
 
 ```console
-yarn add vue-css-donut-chart
+yarn add vue-css-donut-chart@legacy
 ```
 
 <p align="center"><strong><small>OR</small></strong></p>
 
 
 ```console
-npm install vue-css-donut-chart
+npm install vue-css-donut-chart@legacy
 ```
 
 #### Registering `vue-css-donut-chart`
@@ -241,4 +246,4 @@ All the `section-*` listeners are called with the `section` object on which the 
 
 ## License
 
-Code released under [MIT](https://github.com/vue-css-donut-chart/vue-css-donut-chart/blob/master/LICENSE) license.
+Code released under [MIT](https://github.com/dumptyd/vue-css-donut-chart/blob/legacy/LICENSE) license.

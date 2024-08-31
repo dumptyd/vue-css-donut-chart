@@ -3,7 +3,7 @@ name: github-pages
 on:
   push:
     branches:
-      - master
+      - legacy
 
 jobs:
   build-deploy:
@@ -29,3 +29,4 @@ jobs:
           keep_files: true
           publish_branch: gh-pages
           publish_dir: ./docs
+          destination_dir: legacy

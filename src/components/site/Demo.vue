@@ -5,17 +5,17 @@
     <div>
       Lightweight
       <select class="vue-version-select" @change="handleVersionSelectChange">
-        <option value="/vue-css-donut-chart" selected>Vue 2</option>
-        <option value="/vue-css-donut-chart/next">Vue 3</option>
+        <option value="/vue-css-donut-chart/legacy" selected>Vue 2</option>
+        <option value="/vue-css-donut-chart">Vue 3</option>
       </select>
       component for drawing pure CSS donut charts
     </div>
   </div>
 
   <nav class="container-nav">
-    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md">Documentation</a>
-    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md#installation">Installation</a>
-    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/master/README.md#usage">Usage</a>
+    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/legacy/README.md">Documentation</a>
+    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/legacy/README.md#installation">Installation</a>
+    <a href="https://github.com/dumptyd/vue-css-donut-chart/blob/legacy/README.md#usage">Usage</a>
     <a href="https://github.com/dumptyd/vue-css-donut-chart">GitHub</a>
   </nav>
   <div class="container-donut">
