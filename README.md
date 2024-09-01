@@ -76,6 +76,9 @@ pnpm add vue-css-donut-chart
   <vc-donut :sections="sections">Basic donut</vc-donut>
 </template>
 <script setup>
+  // import the styles in a central place (eg: main.js, App.vue) to avoid repetition
+  import 'vue-css-donut-chart/dist/vcdonut.css';
+
   import { VcDonut } from 'vue-css-donut-chart';
   const sections = [{ value: 25 }, { value: 25 }];
 </script>
@@ -216,6 +219,10 @@ const otherProps: DonutChartProps = {
 };
 </script>
 ```
+
+### Types not working?
+
+The types for this component are generated using a fairly recent version of Vue (as of writing this, it's Vue 3.4.21). If they are not working for you, make sure to update your Vue 3 version to the latest.
 
 ## Contributing
 
